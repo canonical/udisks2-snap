@@ -43,6 +43,7 @@ apps:
       - hardware-observe
       - mount-observe
       - polkit
+      - block-devices
     slots:
       - udisks2
     daemon-scope: system
@@ -59,8 +60,8 @@ layout:
     bind: $SNAP/usr/var/lib/udisks2
   /usr/etc/udisks2:
     bind: $SNAP/usr/etc/udisks2
-  /etc/libblockdev/conf.d:
-    bind: $SNAP/etc/libblockdev/conf.d
+  /etc/libblockdev/3/conf.d:
+    bind: $SNAP/etc/libblockdev/3/conf.d
 
 parts:
   udisks2-copyright:
