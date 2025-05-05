@@ -1,10 +1,11 @@
 name: udisks2
-adopt-info: udisks2
+version: 2.9.4-1-dev
 summary: Storage devices management service
 description: |
     Udisks2 provides a dbus service that can query and manager
     storages devices as well as a command-line tool.
 confinement: strict
+grade: stable
 base: core22
 
 slots:
@@ -107,11 +108,6 @@ parts:
     override-pull: |
       craftctl default
       patch -p1 <"${CRAFT_PROJECT_DIR}/proc-mountinfo.patch"
-      git_ver="$(git describe --tags --match "applied/*")"
-      git_ver="${git_ver#importer/}"
-      git_ver="${git_ver#applied/}"
-      git_ver="${git_ver%-0-g*}"
-      craftctl set version="${git_ver}"
 
   policy:
     plugin: nil
