@@ -1,0 +1,46 @@
+2025-05-06 udisks2 2.10.1-1
+
+  [ Changes in primed packages ]
+  
+  dirmngr, gnupg, gnupg-utils, gpg, gpg-agent, gpgconf, gpgsm, keyboxd (built from gnupg2) updated from 2.4.4-2ubuntu17 to 2.4.4-2ubuntu17.2:
+  
+    gnupg2 (2.4.4-2ubuntu17.2) noble-security; urgency=medium
+  
+      * SECURITY UPDATE: verification DoS via crafted subkey data
+        - debian/patches/CVE-2025-30258-1.patch: lookup key for merging/
+          inserting only by primary key in g10/getkey.c, g10/import.c,
+          g10/keydb.h.
+        - debian/patches/CVE-2025-30258-2.patch: remove a signature check
+          function wrapper in g10/mainproc.c, g10/packet.h, g10/sig-check.c.
+        - debian/patches/CVE-2025-30258-3.patch: fix a verification DoS due to
+          a malicious subkey in the keyring in g10/getkey.c, g10/gpg.h,
+          g10/keydb.h, g10/mainproc.c, g10/packet.h, g10/sig-check.c.
+        - debian/patches/CVE-2025-30258-4.patch: fix regression for the recent
+          malicious subkey DoS fix in g10/getkey.c, g10/packet.h.
+        - debian/patches/CVE-2025-30258-5.patch: fix double free of internal
+          data in g10/sig-check.c.
+        - CVE-2025-30258
+  
+     -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Fri, 28 Mar 2025 11:23:49 -0400
+  
+  libnvme1t64 (built from libnvme) updated from 1.8-3build1 to 1.8-3ubuntu1:
+  
+    libnvme (1.8-3ubuntu1) noble; urgency=medium
+  
+      * Fix size reporting for nvme devices based on lba_count (LP: #2079836):
+        - d/p/lp2079836-tree-fix-lab_count-size-calculation.patch
+  
+     -- Heitor Alves de Siqueira <halves@canonical.com>  Mon, 03 Feb 2025 13:14:35 +0000
+  
+  libldap2 (built from openldap) updated from 2.6.7+dfsg-1~exp1ubuntu8.1 to 2.6.7+dfsg-1~exp1ubuntu8.2:
+  
+    openldap (2.6.7+dfsg-1~exp1ubuntu8.2) noble; urgency=medium
+  
+      * Fixup TIMEOUT and NETWORK_TIMEOUT options so they work correctly
+        when SSL is involved. Before they would never timeout, causing
+        hangs on connection failure. Now they timeout as expected.
+        (LP: #2090806)
+        - d/p/lp2090806-ITS-8047-Fix-TLS-connection-timeout-handling.patch
+  
+     -- Matthew Ruffell <matthew.ruffell@canonical.com>  Mon, 09 Dec 2024 15:50:18 +1300
+  
