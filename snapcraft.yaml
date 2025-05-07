@@ -57,7 +57,7 @@ apps:
 
 layout:
   /usr/var/lib/udisks2:
-    bind: $SNAP/usr/var/lib/udisks2
+    type: tmpfs
   /usr/etc/udisks2:
     bind: $SNAP/usr/etc/udisks2
   /etc/libblockdev/3/conf.d:
