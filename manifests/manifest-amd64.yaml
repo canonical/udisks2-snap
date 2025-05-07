@@ -1,9 +1,9 @@
 snapcraft-version: 8.8.1
-snapcraft-started-at: '2025-05-06T13:04:08.981840Z'
+snapcraft-started-at: '2025-05-07T07:40:43.096063Z'
 snapcraft-os-release-id: ubuntu
 snapcraft-os-release-version-id: '24.04'
 name: udisks2
-version: 2.10.1-2
+version: 2.10.1-3
 summary: Storage devices management service
 description: |
   Udisks2 provides a dbus service that can query and manager
@@ -162,7 +162,7 @@ parts:
 architectures:
 - amd64
 image-info:
-  build_url: https://launchpad.net/~snappy-hwe-team/snappy-hwe-snaps/+snap/udisks2-snap-24/+build/2796822
+  build_url: https://launchpad.net/~snappy-hwe-team/snappy-hwe-snaps/+snap/udisks2-snap-24/+build/2797298
 build-packages: []
 build-snaps: []
 primed-stage-packages:
