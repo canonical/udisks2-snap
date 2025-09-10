@@ -1,3 +1,33 @@
+2025-09-10 udisks2 2.10.1-4
+
+  [ Changes in primed packages ]
+  
+  dirmngr, gnupg, gnupg-utils, gpg, gpg-agent, gpgconf, gpgsm, keyboxd (built from gnupg2) updated from 2.4.4-2ubuntu17.2 to 2.4.4-2ubuntu17.3:
+  
+    gnupg2 (2.4.4-2ubuntu17.3) noble-security; urgency=medium
+  
+      * debian/patches/fix-key-validity-regression-due-to-CVE-2025-
+        30258.patch:
+        - Fix a key validity regression following patches for CVE-2025-30258,
+          causing trusted "certify-only" primary keys to be ignored when checking
+          signature on user IDs and computing key validity. This regression makes
+          imported keys signed by a trusted "certify-only" key have an unknown
+          validity (LP: #2114775).
+  
+     -- dcpi <dcpi@u22vm>  Thu, 26 Jun 2025 13:17:22 +0000
+  
+  libblockdev-crypto3, libblockdev-fs3, libblockdev-loop3, libblockdev-mdraid3, libblockdev-nvme3, libblockdev-part3, libblockdev-swap3, libblockdev-utils3, libblockdev3 (built from libblockdev) updated from 3.1.1-1 to 3.1.1-1ubuntu0.1:
+  
+    libblockdev (3.1.1-1ubuntu0.1) noble-security; urgency=medium
+  
+      * SECURITY UPDATE: LPE from allow_active to root in libblockdev via
+        udisks
+        - d/p/0001-dont-allow-suid-and-dev-set-on-fs-resize.patch: don't allow
+          suid and dev set on fs resize in src/plugins/fs/generic.c.
+        - CVE-2025-6019
+  
+     -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Wed, 11 Jun 2025 11:32:51 -0400
+  
 2025-05-07 udisks2 2.10.1-3
 
   [ Changes in primed packages ]
