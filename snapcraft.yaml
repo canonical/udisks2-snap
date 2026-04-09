@@ -1,12 +1,13 @@
 name: udisks2
-version: 2.10.1-5-dev
+version: 2.10.91-1-dev
 summary: Storage devices management service
 description: |
     Udisks2 provides a dbus service that can query and manager
     storages devices as well as a command-line tool.
 confinement: strict
-grade: stable
-base: core24
+grade: devel
+base: core26
+build-base: devel
 
 lint:
   ignore:
@@ -93,6 +94,7 @@ parts:
       - libblockdev-crypto-dev
       - libpolkit-agent-1-dev
       - libpolkit-gobject-1-dev
+      - libblockdev-smart-dev
       - gettext
       - xsltproc
       - docbook-xsl
@@ -102,21 +104,21 @@ parts:
       - libblockdev-crypto3
       - libblockdev-fs3
       - libblockdev-loop3
-      - libblockdev-loop3
       - libblockdev-mdraid3
       - libblockdev-nvme3
       - libblockdev-part3
       - libblockdev-swap3
-      - libblockdev-swap3
       - libblockdev-utils3
       - libblockdev3
+      - libblockdev-smart3
       - libgudev-1.0-0
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=/usr
       - --enable-fhs-media
+      - --with-udevdir=/usr/lib/udev
     source-type: git
-    source-branch: applied/ubuntu/noble-updates
+    source-branch: applied/ubuntu/resolute
     source: https://git.launchpad.net/ubuntu/+source/udisks2
     override-pull: |
       craftctl default
