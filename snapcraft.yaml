@@ -20,6 +20,24 @@ lint:
       - usr/lib/**/libnvme*.so*
       # Used by libbd_crypto
       - usr/lib/**/libvolume_key.so*
+      # Used by libbd_smart at runtime
+      - usr/lib/**/libatasmart.so*
+      # Linked by libbd_crypto and libvolume_key
+      - usr/lib/**/libnss3.so*
+      - usr/lib/**/libnssutil3.so*
+      # NSPR libs linked by libnss3
+      - usr/lib/**/libnspr4.so*
+      - usr/lib/**/libplc4.so*
+      - usr/lib/**/libplds4.so*
+      # NSS crypto modules loaded by libnss3
+      - usr/lib/**/libfreebl3*
+      - usr/lib/**/libfreeblpriv3*
+      - usr/lib/**/libsoftokn3*
+      # Linked by libbd_crypto and libvolume_key
+      - usr/lib/**/libsmime3.so*
+      - usr/lib/**/libssl3.so*
+      # Linked by libbd_crypto and libvolume_key
+      - usr/lib/**/libgpgme.so*
 
 slots:
   udisks2-dbus:
@@ -112,6 +130,9 @@ parts:
       - libblockdev3
       - libblockdev-smart3
       - libgudev-1.0-0
+    prime:
+      - -usr/lib/x86_64-linux-gnu/libnssckbi.so*
+      - -usr/lib/x86_64-linux-gnu/libnssdbm3*
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=/usr
