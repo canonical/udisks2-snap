@@ -5,9 +5,8 @@ description: |
     Udisks2 provides a dbus service that can query and manager
     storages devices as well as a command-line tool.
 confinement: strict
-grade: devel
+grade: stable
 base: core26
-build-base: devel
 
 lint:
   ignore:
