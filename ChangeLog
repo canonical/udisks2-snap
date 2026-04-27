@@ -1,3 +1,1969 @@
+2026-04-27 udisks2 2.10.91-1
+
+  [ alfonsosanchezbeato <alfonsosanchezbeato@yahoo.es> ]
+  * Initial upgrade of udisks2-snap for core26
+    Merge pull request #15 from mpuricx/udisks2-core26
+  * snapcraft.yaml: use arch glob in prime exclusions
+    Merge pull request #17 from mpuricx/fix/prime-arch-glob
+  * snapcraft.yaml: set grade to stable
+    Merge pull request #18 from mpuricx/set-to-stable
+
+  [ Changes in primed packages ]
+  
+  libblockdev-smart3 (3.4.0-1): new primed package
+  
+  libgpgme45 (2.0.1-2build1): new primed package
+  
+  libldap-common (2.6.10+dfsg-1ubuntu5): new primed package
+  
+  adduser (built from adduser) updated from 3.137ubuntu1 to 3.153ubuntu1:
+  
+    adduser (3.153ubuntu1) resolute; urgency=medium
+  
+      * Merge with Debian unstable (LP: #2130097). Remaining changes:
+        - Add support for encrypting home directories (MR: !87):
+          - adduser: Add --encrypt-home option, which calls ecryptfs-setup-private
+            for the hard work.
+          - doc/adduser.8: document the --encrypt-home option
+          - debian/control: suggest ecryptfs-utils >= 67-1
+          - deluser: remove all of /var/lib/ecryptfs/$user with --remove-home
+            extrausers support for adduser and gpasswd (LP #1323732)
+        - Add support for ZFS home directories (LP #1873263)
+        - Enable private home directories by default (LP #48734)
+        - Set DIR_MODE=0750 and SYS_DIR_MODE=0750 in the default adduser.conf
+  
+     -- Nadzeya Hutsko <nadzeya.hutsko@canonical.com>  Tue, 04 Nov 2025 11:22:03 +0100
+  
+    adduser (3.153) unstable; urgency=medium
+  
+      [ Marc Haber ]
+      * various manual page fixes. Thanks to Bjarni Ingi
+        Gislason <bjarniig@simnet.is> (Closes: #1107990, #1105900)
+      * move PATH initialization very early in program.
+        Thanks to Luca Boccassi (Closes: #1108017)
+      * use sanitize_string with replace in find_match.
+        Thanks to Rob Browning (Closes: #1112486)
+  
+      [ Alexander Golubev ]
+      * Some minor messages' fixes.
+  
+     -- Marc Haber <mh+debian-packages@zugschlus.de>  Sun, 14 Sep 2025 13:53:43 +0200
+  
+    adduser (3.152ubuntu1) questing; urgency=medium
+  
+      * Merge with Debian unstable (LP: #2111568).
+        Note: This is the first merge done with git-ubuntu. Please upload
+        appropriately to keep the rich history with all commits being split.
+        Remaining changes:
+        - Add support for encrypting home directories (MR: !87):
+          This feature got a non-trivial refresh after some refactor upstream.
+          + adduser: Add --encrypt-home option, which calls ecryptfs-setup-private
+            for the hard work.
+          + doc/adduser.8: document the --encrypt-home option
+          + debian/control: suggest ecryptfs-utils >= 67-1
+          + deluser: remove all of /var/lib/ecryptfs/$user with --remove-home
+        - extrausers support for adduser and gpasswd (LP #1323732)
+          One feature got dropped in the rebase: updating a user comment with
+          --extrausers is now unsupported as the mechanism has changed in Debian,
+          and usermod doesn't support --extrausers. An error is raised instead if we
+          hit the situation.
+        - Add support for ZFS home directories (LP #1873263)
+        - Enable private home directories by default (LP #48734)
+        - Set DIR_MODE=0750 and SYS_DIR_MODE=0750 in the default adduser.conf
+        Dropped changes:
+        - AdduserCommon.pm, adduser.conf: Change default SYS_NAME_REGEX to allow
+          uppercase letters in the names of system users.
+          Debian now does that by default.
+        - Fix testsuite against newer shadow username restrictions
+          (LP 2077862, Closes: #1077804)
+          Debian fixed the testsuite.
+  
+     -- Florent 'Skia' Jacquet <florent.jacquet@canonical.com>  Fri, 23 May 2025 12:19:31 +0200
+  
+    adduser (3.152) unstable; urgency=medium
+  
+      * only do very basic sanitization for comment.
+        Thanks to Pascal Hambourg, Luca Boccassi and others.
+        (Closes: #1104738, #1101678)
+      * work around #1104726 in perl
+  
+     -- Marc Haber <mh+debian-packages@zugschlus.de>  Tue, 06 May 2025 20:25:46 +0200
+  
+    adduser (3.151) unstable; urgency=medium
+  
+      * update Romanian manual page translation.
+        Thanks to Remus-Gabriel Chelu (Closes: #1101518)
+      * Update German manual page translation.
+        Thanks to Helge Kreutzmann (Closes: #1101523)
+      * fix commentre, it accidentally allowed "-_ (" to _)
+      * update Brazilian Portuguese program translation.
+        Thanks to Adriano Rafael Gomes (Closes: #1101702)
+      * Update portuguese man page translation.
+        Thanks to Américo Monteiro (Closes: #1103635)
+      * update dutch man page translation.
+        Thanks to Frans Spiesschaert (Closes: #1104314)
+  
+     -- Marc Haber <mh+debian-packages@zugschlus.de>  Fri, 02 May 2025 14:39:56 +0200
+  
+    adduser (3.150) unstable; urgency=medium
+  
+      * unset $ENV{CDPATH}.
+        Thanks to John Darrah
+      * update Brazilian Portuguese man page translation.
+        Thanks to Paulo Henrique de Lima Santana (phls) (Closes: #1101390)
+      * use require instead of use, to allow running without perl-modules.
+        Thanks to Samuel Thibault (Closes: #1101454)
+      * improve autopkgtests
+  
+     -- Marc Haber <mh+debian-packages@zugschlus.de>  Fri, 28 Mar 2025 14:21:07 +0100
+  
+    adduser (3.149) unstable; urgency=medium
+  
+      * sort find output in skel.t
+  
+     -- Marc Haber <mh+debian-packages@zugschlus.de>  Sat, 22 Mar 2025 10:40:54 +0100
+  
+    adduser (3.148) unstable; urgency=medium
+  
+      * more improvement of output in skel.t
+  
+     -- Marc Haber <mh+debian-packages@zugschlus.de>  Sat, 22 Mar 2025 06:51:53 +0100
+  
+    adduser (3.147) unstable; urgency=medium
+  
+      * update German manual page translation.
+        Thanks to Helge Kreutzmann (Closes: #1100936)
+      * Update Romanian man page translation.
+        Thanks to Remus-Gabriel Chelu (Closes: #1100956)
+      * extend skel test to give output if it fails.
+      * Standards-Version: 4.7.2 (no changes necessary)↲
+  
+     -- Marc Haber <mh+debian-packages@zugschlus.de>  Fri, 21 Mar 2025 15:13:30 +0100
+  
+    adduser (3.146) unstable; urgency=medium
+  
+      [ Marc Haber ]
+      * explicitly unset BASH_ENV.
+        Thanks to James Trocknell (Closes: #1100023)
+      * make adduser --system --home silent if directory exists (Closes: #1100032)
+      * don't truncate log messages in sanitizing.
+        Thanks to Andrew Sayers (Closes: #1100707)
+      * Better docs regarding adduser --system --home
+      * update debian/copyright
+      * update translation helper scripts
+        Thanks to Maytham Alsudany
+      * Update POT and PO files for program translations
+      * Update POT file for manpage translations
+      * Update Romanian program translation.
+        Thanks to Remus-Gabriel Chelu (Closes: #1100600)
+      * Update Dutch program and man page translation.
+        Thanks to Frans Spiesschaert (Closes: #1100585, #1100586)
+      * Update Galician program translation.
+        Thanks to Parodper
+      * Update Czech program translation.
+        Thanks to Miroslav Kure (Closes: #1099934)
+      * Add Basque program translation.
+        Thanks to Iñaki Larrañaga Murgoitio
+      * Update Japanese program translation.
+        Thanks to Sadaharu Wakisaka
+      * Update French program and man page translations.
+        Thanks to Jean-Paul Guillonneau (Closes: #1100089)
+      * Update Russian program translation.
+        Thanks to Yuri Kozlov (Closes: #1100500)
+      * Update Brasilian Portuguese man page translation.
+        Thanks to Paulo Henrique de Lima Santana (Closes: #1100552)
+      * Update German man page translation.
+        Thanks to Helge Kreutzmann (Closes: #1100555)
+  
+      [ Grzegorz Kuczynski ]
+      * Edit pl.po (translate and fix some format)
+  
+      [ Carles Pina i Estany ]
+      * Update Catalan translation
+  
+     -- Marc Haber <mh+debian-packages@zugschlus.de>  Thu, 20 Mar 2025 14:21:26 +0100
+  
+    adduser (3.145) unstable; urgency=medium
+  
+      [ Marc Haber ]
+      * reduce perl requirements to 5.36 (bookworm) for upgrades
+      * fix a mismatch check in existing_user_status [Matt Barry]
+      * re-work explicit --uid tests (Closes: #1099647)
+      * fix misdetection of non-system accounts as system accounts
+      * add lots of more test cases (Closes: #1099570)
+      * get rid of "foo" user name in some of the tests, streamline tests
+      * Update German program translation.
+        Thanks to Helge Kreutzmann (Closes: #1099678)
+      * Update Polish program translation.
+        Thanks to Grzegorz Kuczyński
+      * Update Japanese program translation.
+        Thanks to Sadaharu Wakisaka
+      * Update German program translation.
+        Thanks to Helge Kreutzmann (Closes: #1099678)
+      * Update Portuguese program translation.
+        Thanks to Américo Monteiro (Closes: #1099771)
+  
+      [ Tianyu Chen ]
+      * Update Simplified Chinese program translation.
+        Thanks to Tianyu Chen
+  
+     -- Marc Haber <mh+debian-packages@zugschlus.de>  Sat, 08 Mar 2025 15:28:02 +0100
+  
+    adduser (3.144) unstable; urgency=medium
+  
+      [ Matt Barry ]
+      * Clean up system account logic.
+        Thanks to Michael Musenbrock and Vincent Lefevre
+        (Closes: #1099470, #1099477)
+  
+     -- Marc Haber <mh+debian-packages@zugschlus.de>  Tue, 04 Mar 2025 20:57:13 +0100
+  
+    adduser (3.143) unstable; urgency=medium
+  
+      [ Marc Haber ]
+      * Standards-Version: 4.7.1 (no changes neceessary)
+      * unset $ENV{"ENV"}
+        Thanks to Dan Jacobson (Closes: #1099089)
+      * Update Portuguese translation for adduser's manpage.
+        Thanks to Américo Monteiro <a_monteiro@gmx.com> (Closes: #1099344)
+      * don't issue warnings for --home /nonexistent.
+        Thanks to Sven Joachim (Closes: #1099073)
+      * allow adding system accounts to system groups (Closes: #1099397)
+  
+      [ Matt Barry ]
+      * refactor existing_*_ok (Closes: #1098922)
+  
+     -- Marc Haber <mh+debian-packages@zugschlus.de>  Mon, 03 Mar 2025 19:38:23 +0100
+  
+    adduser (3.142) unstable; urgency=medium
+  
+      * assume CAP_SYS_ADMIN not present if /proc not accessible.
+        Thanks to Chris Hofstaedtler (Closes: #1098711)
+      * Salsa CI: Add extra test to validate that 'adduser' can be used.
+        Also update salsa-ci.yml template to latest version to have more
+        comments and link to docs inline. Thanks to Otto Kekäläinen
+      * sanitize target string coming from readlink()
+  
+     -- Marc Haber <mh+debian-packages@zugschlus.de>  Tue, 25 Feb 2025 09:59:47 +0100
+  
+    adduser (3.141) unstable; urgency=medium
+  
+      * add new autopktest to check adduser basic functionality.
+      * README: Document adduser behavior in minimal chroots
+      * call textdomain fully qualified. Import function explicitly.
+        Thanks to Yuri Konotopov, Christian Weeks (Closes: #1098692, #1098690)
+      * only set binmode if Encode is loaded in deluser
+  
+     -- Marc Haber <mh+debian-packages@zugschlus.de>  Sat, 22 Feb 2025 22:11:35 +0100
+  
+    adduser (3.140) unstable; urgency=medium
+  
+      * update Brazilian Portuguese manpage translation.
+        Thanks to Paulo Henrique de Lima Santana (Closes: #1094210)
+      * Update Dutch program translation.
+        Thanks to Frans Spiesschaert (Closes: #1094496)
+      * Update Dutch manpage translation.
+        Thanks to Frans Spiesschaert (Closes: #1094497)
+      * Add login to test Dependencies
+      * allow adduser to run without Encode and I18N::Langinfo installed.
+        Thanks to Yves-Alexis Perez, Bastian Germann (Closes: #1098508)
+  
+     -- Marc Haber <mh+debian-packages@zugschlus.de>  Sat, 22 Feb 2025 07:56:20 +0100
+  
+    adduser (3.139) unstable; urgency=medium
+  
+  
+      * improve code rubustness regarding Unicode
+      * adapt default regular expressions to new useradd behavior
+      * explicitly catch and handle useradd's "invalid user name" exit code
+      * more documentation regarding PRECIS Framework
+      * more tests against invalid / unwanted user names
+      * modernize things
+      * update German translation of man page.
+        Thanks to Helge Kreutzmann
+      * Formatting improvements to manual pages.
+        Thanks to Helge Kreutzmann (Closes: 1087703)
+  
+     -- Marc Haber <mh+debian-packages@zugschlus.de>  Thu, 20 Feb 2025 22:01:57 +0100
+  
+    adduser (3.138) experimental; urgency=medium
+  
+      * experimental upload because of so many changes.
+      * adduser und deluser can now run with -T, and actually do it.
+        Unfortunately, we had to disable some tests to allow this.
+        Thanks to Christoph Berg (Closes: #214546)
+      * apply patch to allow reserve_{uid|gid}_pool.
+        Thanks to Yair Yarom (Closes: #1067845)
+      + only call logger --id $$ if SYS_ADMIN capability is present. This
+        is related to #1086233. Thanks to Paul Gevers, Peter Colberg,
+         Simon McVittie, and Chris Hofstaedtler. (Closes: #1074567)
+      * Fix wrongly parenthesized signal handler message.
+        Thanks to Tasos Sahanidis <tasos@tasossah.com>
+      * add documentation about how to lock and unlock accounts
+      * adapt adduser to more strict user name checking now enforced by
+        useradd. This unfortunately meant to disable some more of our tests.
+      * give --badname to useradd to allow creation of the user
+      * tweak valid_username tests for new useradd
+        * disable \ user name test
+        * disable worst user name test
+      * lots of more comments, more debugging, more consistency inside
+        the package and between adduser and deluser.
+      * put lots of log_info messaes into lower priorities
+      * stdoutmsglevel is now warn. This allows adduser --system to be completey
+        silent without having to check whether we run from a maintainer script.
+      * log level settings now have priority over the deprecated verbose.
+      * Standards-Version: 4.7.0 (no changes necessary)
+  
+      * Manual pages:
+        * Work by Helge Kreutzmann:
+          * Fix various trivial issues in man pages.
+            Addresses: #1031081
+          * bulk change: fix wrong capitalization of "modes"
+          * bulk change: fix wrong interpunction in "modes" lines
+          * stylistic changes to adduser.8 man page.
+          * fix inconsistency GID/ID.
+          * use "digits" instead of "numbers"
+          * re-word security warning about deluser via sudo.
+        * Work by Bjarni Ingi Gislason <bjarnii@simnet.is>:
+          * fix some formatting and text issues in manpages.
+            (Closes: #1037057)
+          * add blank lines between .YS and .SY.
+          * add missing .YS
+          * add missing whitespace after quotes
+          * fix wrong usage of .BR and .IR, move to .B and .I.
+          * fix semantic linebreaks for deprecated options.
+          * fix missing comma.
+        * mention users-and-groups.html in adduser.8.
+          Thanks to Karl O. Pinc (Closes: #1051356)
+        * various clarifications, re-wording, adaption to
+          behavior change and new features.
+        * avoid Debian codename in adduser.8 manpage
+      * Translations:
+        * update portuguese program translation.
+          Thanks to Américo Monteiro (Closes: #1051644)
+        * Update Portuguese translation of manual pages.
+          Thanks to Américo Monteiro (Closes: #1056144, #1040441)
+        * Update Catalan translation. Thanks to Carles Pina i Estany.
+        * Update dutch program translation.
+          Thanks to Frans Spiesschaert (Closes: #1041279)
+        * update durch manual package translation.
+          Thanks to Frans Spiesschaert (Closes: #1041877)
+        * new translation for French manual page.
+          Thanks to Jean-Paul Guillonneau (Closes: #1083293)
+        * Add new romanian translation for program and man pages.
+          Thanks to Remus-Gabriel Chelu (Closes: #1082102)
+        * Update German translation of man page
+          Thanks to Helge Kreutzmann
+  
+     -- Marc Haber <mh+debian-packages@zugschlus.de>  Fri, 01 Nov 2024 19:19:54 +0100
+  
+    adduser (3.137ubuntu2) oracular; urgency=medium
+  
+      * Fix testsuite against newer shadow username restrictions
+        (LP: #2077862, Closes: #1077804)
+  
+     -- Simon Chopin <schopin@ubuntu.com>  Mon, 26 Aug 2024 19:00:25 +0200
+  
+  libsasl2-2, libsasl2-modules-db (built from cyrus-sasl2) updated from 2.1.28+dfsg1-5ubuntu3.1 to 2.1.28+dfsg1-9ubuntu3:
+  
+    cyrus-sasl2 (2.1.28+dfsg1-9ubuntu3) resolute; urgency=medium
+  
+      * Disable postgresql support in the libsasl2-modules-sql on i386 since
+        postgresql is no longer build for that architecture (LP: #2142320):
+        - d/control: don't build-depend on libpq-dev on i386
+        - d/rules: only enable pgsql if not on i386
+  
+     -- Andreas Hasenack <andreas.hasenack@canonical.com>  Fri, 20 Feb 2026 15:43:09 -0300
+  
+    cyrus-sasl2 (2.1.28+dfsg1-9ubuntu2) resolute; urgency=medium
+  
+      * No-change mass rebuild for Ubuntu 26.04 (LP: #2132257)
+  
+     -- Sebastien Bacher <seb128@debian.org>  Fri, 06 Feb 2026 21:12:22 +0100
+  
+    cyrus-sasl2 (2.1.28+dfsg1-9ubuntu1) questing; urgency=medium
+  
+      * d/rules: add -std=gnu17 to build it with gcc-15 on questing (LP: #2124256)
+  
+     -- Nishit Majithia <nishit.majithia@canonical.com>  Wed, 17 Sep 2025 14:21:29 +0530
+  
+    cyrus-sasl2 (2.1.28+dfsg1-9) unstable; urgency=medium
+  
+      * Team upload
+      * digestmd5: Free RC4 cipher (Closes: #1091694)
+      * Apply arch/indep split (Closes: #1065595)
+      * d/rules: Drop unnecessary variables
+      * Introduce nodoc profile
+      * Prevent installing man1
+  
+      [ Guillem Jover ]
+      * Fix and simplify sample server/client build (Closes: #1078998)
+  
+     -- Bastian Germann <bage@debian.org>  Fri, 28 Feb 2025 22:58:50 +0100
+  
+    cyrus-sasl2 (2.1.28+dfsg1-8) unstable; urgency=medium
+  
+      * Team upload
+  
+      [ Sergio Durigan Junior ]
+      * d/sasl2-bin.saslauthd.service: Add Group=sasl directive (LP: #2078851)
+  
+     -- Bastian Germann <bage@debian.org>  Wed, 04 Sep 2024 23:46:34 +0200
+  
+    cyrus-sasl2 (2.1.28+dfsg1-7) unstable; urgency=medium
+  
+      * Team upload
+      * Harmonize MD5 signatures with OpenSSL (Closes: #1074899)
+      * Harmonize getsubopt casts with glibc
+  
+     -- Bastian Germann <bage@debian.org>  Wed, 07 Aug 2024 11:50:42 +0200
+  
+    cyrus-sasl2 (2.1.28+dfsg1-6) unstable; urgency=medium
+  
+      * Team upload
+      * Patch: Prevent six import (Closes: #1067425)
+  
+     -- Bastian Germann <bage@debian.org>  Thu, 21 Mar 2024 19:19:46 +0000
+  
+  dirmngr, gnupg, gpg, gpg-agent, gpgconf, gpgsm (built from gnupg2) updated from 2.4.4-2ubuntu17.3 to 2.4.8-4ubuntu3:
+  
+    gnupg2 (2.4.8-4ubuntu3) resolute; urgency=medium
+  
+      * SECURITY UPDATE: stack-based buffer overflow in tpm2daemon
+        - debian/patches/CVE-2026-24882.patch: fix possible buffer overflow in
+          PKDECRYPT in tpm2d/tpm2.c.
+        - CVE-2026-24882
+  
+     -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Thu, 29 Jan 2026 08:57:30 -0500
+  
+    gnupg2 (2.4.8-4ubuntu2) resolute; urgency=medium
+  
+      * SECURITY UPDATE: Remote Code Execution
+        - debian/patches/CVE-2025-68973.patch: gpg: Fix possible memory
+          corruption in the armor parser.
+        - CVE-2025-68973
+  
+     -- Allen Huang <allen.huang@canonical.com>  Mon, 05 Jan 2026 23:02:06 +0000
+  
+    gnupg2 (2.4.8-4ubuntu1) resolute; urgency=medium
+  
+      * Merge with Debian unstable (LP: #2130739). Remaining changes:
+        - Honor http_proxy= environment variables by default in the systemd user
+          session dirmngr service
+        - Don't build the gpgv-win32 package which only debian-installer uses
+        - gnupg: Demote gnupg-l10n to Recommends
+        - Demote all Recommends: gnupg to Suggests
+        - Stop building gpg-wks-server, gpg-wks-client on i386
+        - Demote gpg-wks-client to Recommends instead
+        - gpg{,sm}: Recommend gpg-agent, dirmngr
+        - Disable swtpm, libss2-dev build-dep on i386
+  
+     -- Florent 'Skia' Jacquet <skia@ubuntu.com>  Wed, 05 Nov 2025 18:18:29 +0100
+  
+    gnupg2 (2.4.8-4) unstable; urgency=medium
+  
+      * Make OpenPGP compliance mode require a self-sig for each UID
+      * debian/watch: move to version 5
+      * Drop Rules-Requires-Root: no (now the default)
+  
+     -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Wed, 22 Oct 2025 16:39:23 -0400
+  
+    gnupg2 (2.4.8-3) unstable; urgency=low
+  
+      [ Pino Toscano ]
+      * Restrict the TPM integration to Linux, as it is available mostly there:
+        - limit the libtss2-dev build dependency as linux-any
+        - set the architecture of the tpm2daemon binary package as linux-any
+        - suggest tpm2daemon in gpg-agent only on Linux
+      * Enable the libusb-1.0-0-dev build dependency also on Hurd, as it is
+        available now.
+      * Limit the libpam-systemd suggest in gpg-agent, and dirmngr as linux-any,
+        as systemd exists only on Linux.
+  
+     -- Andreas Metzler <ametzler@debian.org>  Thu, 21 Aug 2025 17:55:06 +0200
+  
+    gnupg2 (2.4.8-2ubuntu2) questing; urgency=medium
+  
+      * Rebuild to include updated RISC-V base ISA RVA23
+  
+     -- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>  Fri, 05 Sep 2025 11:39:24 +0000
+  
+    gnupg2 (2.4.8-2ubuntu1) questing; urgency=medium
+  
+      * Merge with Debian unstable (LP: #2120550). Remaining changes:
+        - Honor http_proxy= environment variables by default in the systemd user
+          session dirmngr service
+        - Stop building gpg-wks-server, gpg-wks-client on i386
+        - gnupg: Demote gnupg-l10n to Recommends
+        - Demote all Recommends: gnupg to Suggests
+        - Demote gpg-wks-client to Recommends instead
+        - gpg{,sm}: Recommend gpg-agent, dirmngr
+        - Don't build the gpgv-win32 package which only debian-installer uses
+        - Disable swtpm, libss2-dev build-dep on i386
+  
+     -- Ravi Kant Sharma <ravi.kant.sharma@canonical.com>  Wed, 13 Aug 2025 13:03:16 +0200
+  
+    gnupg2 (2.4.8-2) unstable; urgency=medium
+  
+      * Upload to unstable.
+  
+     -- Andreas Metzler <ametzler@debian.org>  Mon, 11 Aug 2025 13:45:57 +0200
+  
+    gnupg2 (2.4.8-1) experimental; urgency=medium
+  
+      * New upstream version.
+      * Drop cherry-picked patches, unfuzz.
+  
+     -- Andreas Metzler <ametzler@debian.org>  Sun, 29 Jun 2025 14:12:41 +0200
+  
+    gnupg2 (2.4.7-21ubuntu1) questing; urgency=medium
+  
+      * Merge with Debian unstable. Remaining changes:
+        - Honor http_proxy= environment variables by default in the systemd user
+          session dirmngr service
+        - Stop building gpg-wks-server, gpg-wks-client on i386
+        - gnupg: Demote gnupg-l10n to Recommends
+        - Demote all Recommends: gnupg to Suggests
+        - Demote gpg-wks-client to Recommends instead
+        - gpg{,sm}: Recommend gpg-agent, dirmngr
+        - Don't build the gpgv-win32 package which only debian-installer uses
+        - Disable swtpm, libss2-dev build-dep on i386
+  
+     -- Ravi Kant Sharma <ravi.kant.sharma@canonical.com>  Fri, 18 Jul 2025 16:10:08 +0200
+  
+    gnupg2 (2.4.7-21) unstable; urgency=medium
+  
+      * update Dutch po file (Closes: #1104540)
+      * Upload to unstable.
+  
+     -- Andreas Metzler <ametzler@debian.org>  Sun, 01 Jun 2025 06:45:25 +0200
+  
+    gnupg2 (2.4.7-20) experimental; urgency=medium
+  
+      * Add Built-Using/Static-Built-Using data for gpgv-static
+        (Thanks, Aurelien Jarno) Closes: #1106800
+      * Also set Built-Using for gpgv-win32
+  
+     -- Andreas Metzler <ametzler@debian.org>  Sat, 31 May 2025 12:55:36 +0200
+  
+    gnupg2 (2.4.7-19) unstable; urgency=medium
+  
+      * Upload to unstable.
+  
+     -- Andreas Metzler <ametzler@debian.org>  Wed, 14 May 2025 06:22:05 +0200
+  
+    gnupg2 (2.4.7-18) experimental; urgency=medium
+  
+      [ Daniel Kahn Gillmor ]
+      * Handle certification-only pubkeys correctly (Closes: #1101007)
+  
+      [ Andreas Metzler ]
+      * Cherry-pick fixes from upstream STABLE-BRANCH-2-4:
+        + Fix key generation with existing key from card.
+          (2.4.7 regression) https://dev.gnupg.org/T7457
+        + gpgconf: Fix reload and kill of keyboxd
+          https://dev.gnupg.org/T7569
+        + keyboxd: Convert upper-case email-address search string to lower-case
+          https://dev.gnupg.org/T7576
+        + Fix use of undefined behavior in ksba-io-support.c
+          (Use memchr since calling strchr on a non-NUL terminated string is
+          undefined behavior.)
+        + Fix --list-filter select='disabled-f'.
+  
+     -- Andreas Metzler <ametzler@debian.org>  Sun, 11 May 2025 13:04:10 +0200
+  
+    gnupg2 (2.4.7-17ubuntu3) questing; urgency=medium
+  
+      * Do not build tpm2daemon on i386
+  
+     -- Julian Andres Klode <juliank@ubuntu.com>  Fri, 09 May 2025 21:07:52 +0200
+  
+    gnupg2 (2.4.7-17ubuntu2) questing; urgency=medium
+  
+      * Disable swtpm, libss2-dev build-dep on i386
+  
+     -- Julian Andres Klode <juliank@ubuntu.com>  Fri, 09 May 2025 20:15:39 +0200
+  
+    gnupg2 (2.4.7-17ubuntu1) questing; urgency=medium
+  
+      * Merge with Debian unstable. Remaining changes:
+        - Honor http_proxy= environment variables by default in the systemd user
+          session dirmngr service
+        - Stop building gpg-wks-server, gpg-wks-client on i386
+        - gnupg: Demote gnupg-l10n to Recommends
+        - Demote all Recommends: gnupg to Suggests
+        - Demote gpg-wks-client to Recommends instead
+        - gpg{,sm}: Recommend gpg-agent, dirmngr
+        - Don't build the gpgv-win32 package which only debian-installer uses
+      * Dropped changes, merged in Debian:
+        - Cherry-pick Debian commit on git c4d2593b178de88ce22004d78a116f977f9bc5d6
+        - revert-rfc4880bis.patch; Debian imported more elaborate freepg patchset
+        - Dropped build dependencies for t64 rebuilds; those have been dealt with
+          using build profiles in Debian.
+        - Do not use keyboxd by default (merged in Debian)
+        - Suggest keyboxd, keyboxd is now in the gpg package.
+        - debian/migrate-pubring-from-classic-gpg: Add 2.4 to allowlist
+        - d/tests/simple-tests: Use RSA keys for now.
+      * Dropped changes, merged upstream:
+        - CVE-2025-30258 security patchews
+        - FTBFS fixes, all applied upstream
+        - The --assert-pubkey_algo feature patch
+  
+     -- Julian Andres Klode <juliank@ubuntu.com>  Fri, 09 May 2025 19:31:41 +0200
+  
+    gnupg2 (2.4.7-17) unstable; urgency=medium
+  
+      * re-enable piuparts in salsa-ci, keyboxd package is no more.
+      * disable missing-breaks salsa ci. (fp: gpg-from-sq)
+      * Add pkg.gnupg2.gpgvonly build profile. (Thanks, Helmut Grohne)
+        Closes: #1104210
+  
+     -- Andreas Metzler <ametzler@debian.org>  Mon, 28 Apr 2025 18:13:47 +0200
+  
+    gnupg2 (2.4.7-16) unstable; urgency=medium
+  
+      * Hardcode the list of archs where swtpm is available (Closes: #1103931)
+  
+     -- Andreas Metzler <ametzler@debian.org>  Sat, 26 Apr 2025 16:19:09 +0200
+  
+    gnupg2 (2.4.7-15) unstable; urgency=medium
+  
+      [ Andreas Metzler ]
+      * Fix typo in gpg's README.Debian
+      * Skip debian-archive-trixie-stable.gpg in ci migration test
+      * Add NEWS entry for smartcard related changes in 2.4. (Closes: #1102717)
+  
+      [ Daniel Kahn Gillmor ]
+      * d/tests/migration: use *.pgp instead of *.gpg
+  
+     -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Tue, 15 Apr 2025 23:06:01 -0400
+  
+    gnupg2 (2.4.7-14) unstable; urgency=medium
+  
+      * gpgv: Avoid dependencies on npth and libassuan
+        (Closes: #1102621)
+  
+     -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Fri, 11 Apr 2025 18:50:53 -0400
+  
+    gnupg2 (2.4.7-13) unstable; urgency=medium
+  
+      * Release to unstable
+      * d/tests/verify-openpgp: allow stderr
+      * override warning about FreePG README
+      * d/changelog: merging in old entries
+  
+     -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Thu, 10 Apr 2025 15:12:43 -0400
+  
+    gnupg2 (2.4.7-12) experimental; urgency=medium
+  
+      * d/tests/verify-openpgp: add test to ensure default output of
+        OpenPGP-compatible data
+      * Standards-Version: bump to 4.7.2 (no changes needed)
+      * Forward no-keyboxd.patch upstream
+  
+     -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Tue, 08 Apr 2025 13:20:39 -0400
+  
+    gnupg2 (2.4.7-11) experimental; urgency=medium
+  
+      * Drop duplicate systemd-user files in gnupg/examples/
+      * Add CVE number to 2.4.7-5 changelog entry
+      * Also remove duplicate dirmngr and keyboxd systemd files
+      * Formatting fixes for migrate-pubring-from-classic-gpg.1
+        (Thanks to Bjarni Ingi Gislason) Closes: #1100793
+      * Revert FreePG patch for CSF newline cleanup. Closes: #1101011
+  
+     -- Andreas Metzler <ametzler@debian.org>  Mon, 31 Mar 2025 18:04:35 +0200
+  
+    gnupg2 (2.4.7-10) experimental; urgency=medium
+  
+      * Do not set use-keyboxd when initializing ~/.gnupg/ (Patch copied from
+        Ubuntu.)
+      * Patch from -7 (Verify text-mode signatures ...) included in FreePG,
+        rename.
+  
+     -- Andreas Metzler <ametzler@debian.org>  Mon, 17 Mar 2025 18:22:04 +0100
+  
+    gnupg2 (2.4.7-9) experimental; urgency=medium
+  
+      * avoid a double-free (pulled from STABLE-BRANCH-2-4 upstream)
+  
+     -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Thu, 13 Mar 2025 10:12:31 -0400
+  
+    gnupg2 (2.4.7-8) experimental; urgency=medium
+  
+      * Avoid regression on sig verification for expired or revoked keys
+        (Closes: #1099141)
+  
+     -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Fri, 07 Mar 2025 13:54:17 -0500
+  
+    gnupg2 (2.4.7-7) experimental; urgency=medium
+  
+      * Merge FreePG changes
+      * Support large RSA keygen in non-batch mode (following FreePG)
+      * Verify text-mode signatures over binary literal data packets
+  
+     -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Wed, 05 Mar 2025 16:25:05 -0500
+  
+    gnupg2 (2.4.7-6) experimental; urgency=medium
+  
+      * refresh patches from FreePG (adopted OpenPGP compliance)
+      * refresh non-FreePG patches
+      * lintian-override for filename of distsigkey.gpg
+      * override Lintian warning about unused FreePG gitlab CI
+  
+     -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Wed, 26 Feb 2025 17:21:31 -0500
+  
+    gnupg2 (2.4.7-5) experimental; urgency=medium
+  
+      [ Andreas Metzler ]
+      * Refresh patches from FreePG
+      * Two more patches accepted by FreePG, adapt patch series.
+  
+      [ Daniel Kahn Gillmor ]
+      * Align CSF generation and verification with standard
+      * Avoid DoS on signature verification. CVE-2025-30258
+  
+     -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Fri, 21 Feb 2025 17:24:15 -0500
+  
+    gnupg2 (2.4.7-4) experimental; urgency=medium
+  
+      [ Daniel Kahn Gillmor ]
+      * Note relationship between tpm2daemon and gpg-agent
+      * patch 21: use git format-patch style attribution
+      * keyboxd.socket: drop FileDescriptorName, not needed
+      * override lintian tag spare-manual-page on keyboxd.1
+      * drop GSM_SKIP_SSH_AGENT_WORKAROND hack
+  
+      [ Andreas Metzler ]
+      * block-ptrace-on-secret-daemons accepted into FreePG, rename.
+      * Tag patch as forwarded
+  
+      [ Daniel Kahn Gillmor ]
+      * move keyboxd into the gpg package (Closes: #1095451)
+      * Emit only OpenPGP artifacts by default
+      * Modernize reasoning for KOO as default keyserver
+      * consolidate ssh-agent emulation socket changes in snyc with FreePG proposal
+      * Disallow compressed signatures and certificates: point to FreePG proposal
+  
+     -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Sat, 08 Feb 2025 01:26:40 -0500
+  
+    gnupg2 (2.4.7-3) experimental; urgency=medium
+  
+      [ Jonathan McDowell ]
+      * Enable tpm2daemon for TPM backed keys (Closes: #1058571)
+  
+      [ Daniel Kahn Gillmor ]
+      * Stop shipping CA certificate for SKS pool
+      * Disallow compressed signatures and certificates (thanks, Demi Marie
+        Obenour!)
+      * swtpm is only needed during build for tests
+      * tpm2daemon: tweak grammar in package description
+      * run tests serially due to TPM port collisions
+  
+     -- Daniel Kahn Gillmor <dkg@fifthhorseman.net>  Tue, 28 Jan 2025 18:17:36 -0500
+  
+    gnupg2 (2.4.7-2) experimental; urgency=medium
+  
+      [ Richard Hansen ]
+      * debian/control: Allow backported libgpg-error-mingw-w64-dev
+      * debian/Xsession.d/90gpg-agent: Add comment explaining GPG_AGENT_INFO
+      * gpg-agent.socket: Set GPG_AGENT_INFO in systemd for gnupg1
+  
+      [ Daniel Kahn Gillmor ]
+      * use FreePG variants of relevant patches
+      * move the FreePG patches to the beginning
+      * refresh FreePG
+  
+      [ Andreas Metzler ]
+      * Enable freepg patch Ship-sample-systemd-unit-files.patch
+      * Import keyboxd systemd support files into a patch
+      * Import improvements to systemd files into patches
+      * Use/install systemd files from (patched) source.
+  
+     -- Andreas Metzler <ametzler@debian.org>  Sun, 26 Jan 2025 13:25:38 +0100
+  
+    gnupg2 (2.4.7-1) experimental; urgency=medium
+  
+      * New upstream version.
+        + Drop cherry-picked patch.
+        + Fixes change of binary representation of Ed25519 OpenPGP signature
+          packets on export/import. Closes: #1087821
+  
+     -- Andreas Metzler <ametzler@debian.org>  Sat, 30 Nov 2024 11:49:02 +0100
+  
+    gnupg2 (2.4.6-1) experimental; urgency=medium
+  
+      * New upstream version.
+      * Drop superfluous patches
+        001-gpg-Minor-fix-when-building-with-disable-exec.patch and
+        restore-nl.po.patch .
+      * Ship new binary in gpg-mail-tube in gnupg-utils.
+      * Run wrap-and-sort -ast
+      * Rename debian/keyboxd.8 to .1 to match section in .TH command
+      * Add patch to avoid installing gnupg.7.html into mandir.
+      * Do not err on importing rev-cert for expired key.
+        Cherry-picked 48aa9e82657902ceb7ef081c6c55adbea5dd0217 from upstream GIT
+        master. (Closes: #1086140)
+      * Add myself to uploaders.
+      * Update copyright info for 2.4.6
+  
+     -- Andreas Metzler <ametzler@debian.org>  Mon, 04 Nov 2024 07:16:37 +0100
+  
+    gnupg2 (2.4.5-3) experimental; urgency=medium
+  
+      [ Daniel Kahn Gillmor ]
+      * autopkgtest: Add a test for #1071552
+  
+      [ Richard Hansen ]
+      * d/gpg-agent.gpg-agent-ssh.user.socket: Only set the SSH_AUTH_SOCK
+        environment variable if gpg-agent's enable-ssh-support option is enabled
+        (in ~/.gnupg/gpg-agent.conf).  This prevents gpg-agent from overriding
+        ssh-agent (from the openssh-client package) unless the user explicitly
+        requests it. (Closes: #1078787)
+  
+      [ Andreas Metzler ]
+      * Pull upstream fix to fix FTBFS with gcc 14. Closes: #1078870
+      * Bump libgpg-error-mingw-w64-dev b-d to get fixed 1.50 version.
+        Closes: #1081807
+  
+     -- Andreas Metzler <ametzler@debian.org>  Mon, 16 Sep 2024 18:17:09 +0200
+  
+    gnupg2 (2.4.5-2) experimental; urgency=medium
+  
+      [ Andreas Metzler ]
+      * Team upload.
+      * Demote gnupg metapackage dependency on gpg-wks-server to Suggests since it
+        pulls in an MTA. Closes: #1070879
+      * Build with --enable-maintainer-mode and re-add b-d on librsvg2-bin.
+      * Merge unstable changelog.
+      * Drop b-d on transfig, it is provided by fig2dev.
+      * Add patches to avoid setting AEAD: OCB key-preference on generated keys
+        and to avoid using OCB-mode even if AEAD: OCB key preference is set
+        on recipient key.
+      * Version imagemagick b-d to prevent installation of
+        graphicsmagick-imagemagick-compat instead.
+      * Fix blhc test with 'blhc: ignore-line-regexp'.
+      * Disable piuparts CI test, it is thrown by having to test upgrade/downgrade
+        (because some parts of gpg are installed by default) with additional
+        compilation that the package set has grown by keyboxd.
+  
+      [ Daniel Kahn Gillmor ]
+      * Standards-Version: bump to 4.7.0 (no changes needed)
+      * d/copyright: Update dates, add Andreas Metzler for debian/*
+      * d/changelog: correct old misspelling of "ghostscript"
+      * Generate documentation artifacts from source, respecting nodoc
+      * Stop shipping upstream ChangeLog (/usr/share/doc/*/changelog.gz)
+      * Use debian standard UnicodeData.txt
+      * Rebuild generated header files in common/
+      * Strip Changelog-2011 files when building too
+      * Restore nl.po
+      * Enable Salsa-Ci (MR !16 by Otto Kekäläinen)
+      * Port scripts from bash to /bin/sh (MR !10 by
+        наб <nabijaczleweli@nabijaczleweli.xyz>).
+      * Move the gnupg package into the metapackages section.
+      * Move gpgv, gnupg-utils, and gpg-wks-client from Depends into Recommends
+        of gnupg.
+      * Stop pointing VCS-GIT at non-existent debian/main branch. (MR !12 by наб
+        <nabijaczleweli@nabijaczleweli.xyz>)
+  
+     -- Andreas Metzler <ametzler@debian.org>  Mon, 20 May 2024 11:00:57 +0200
+  
+    gnupg2 (2.4.5-1) experimental; urgency=low
+  
+      * Team upload.
+      * New upstream version.
+        + Drop spelling-fixes.diff, included upstream.
+      * [lintian] B-d on pkgconf instead of pkg-config.
+  
+     -- Andreas Metzler <ametzler@debian.org>  Sat, 16 Mar 2024 11:16:01 +0100
+  
+    gnupg2 (2.4.4-4) experimental; urgency=low
+  
+      * Team upload.
+      * Turn debian/gnupg-l10n.install into an executable that parses
+        $DEB_BUILD_PROFILES. This seems to be the only working solution to avoid
+        bad interaction of dh_install/dh_missing with nodoc.
+  
+     -- Andreas Metzler <ametzler@debian.org>  Sat, 09 Mar 2024 14:40:53 +0100
+  
+    gnupg2 (2.4.4-3) experimental; urgency=low
+  
+      * Team upload.
+      * gpgcompose cleanup, drop orphaned manpage and mention in package
+        description.
+      * Fix autopkgtests, mr!14. (Thanks, Julian Andres Klode)
+      * Add support for nodoc build-profile to ease bootstrapping.
+        Closes: #980768
+  
+     -- Andreas Metzler <ametzler@debian.org>  Sat, 09 Mar 2024 09:13:09 +0100
+  
+    gnupg2 (2.4.4-2ubuntu24) questing; urgency=medium
+  
+      * Cherry-pick Debian commit on git c4d2593b178de88ce22004d78a116f977f9bc5d6,
+        to fix autopkgtests failures with new debian-archive-keyring 
+  
+     -- Gianfranco Costamagna <locutusofborg@debian.org>  Thu, 01 May 2025 21:01:27 +0200
+  
+    gnupg2 (2.4.4-2ubuntu23) plucky; urgency=medium
+  
+      * SECURITY UPDATE: verification DoS via crafted subkey data
+        - debian/patches/CVE-2025-30258-1.patch: lookup key for merging/
+          inserting only by primary key in g10/getkey.c, g10/import.c,
+          g10/keydb.h.
+        - debian/patches/CVE-2025-30258-2.patch: remove a signature check
+          function wrapper in g10/mainproc.c, g10/packet.h, g10/sig-check.c.
+        - debian/patches/CVE-2025-30258-3.patch: fix a verification DoS due to
+          a malicious subkey in the keyring in g10/getkey.c, g10/gpg.h,
+          g10/keydb.h, g10/mainproc.c, g10/packet.h, g10/sig-check.c.
+        - debian/patches/CVE-2025-30258-4.patch: fix regression for the recent
+          malicious subkey DoS fix in g10/getkey.c, g10/packet.h.
+        - debian/patches/CVE-2025-30258-5.patch: fix double free of internal
+          data in g10/sig-check.c.
+        - CVE-2025-30258
+  
+     -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Fri, 28 Mar 2025 11:23:49 -0400
+  
+    gnupg2 (2.4.4-2ubuntu22) plucky; urgency=medium
+  
+      * Don't build the gpgv-win32 package which only debian-installer uses
+  
+     -- Adrien Nader <adrien.nader@canonical.com>  Fri, 10 Jan 2025 14:24:01 +0100
+  
+    gnupg2 (2.4.4-2ubuntu21) plucky; urgency=medium
+  
+      * revert-rfc4880bis.patch: Revert the "LibrePGP" changes that introduce
+        the standards-incompatible v5 keyformat and others by default.
+  
+     -- Julian Andres Klode <juliank@ubuntu.com>  Wed, 04 Dec 2024 10:25:09 +0100
+  
+    gnupg2 (2.4.4-2ubuntu20) plucky; urgency=medium
+  
+      * debian/patches/fix-disable-exec-ftbfs.patch: Fix FTBFS on amd64 by
+        dropping this previous patch which appears to not be needed anymore.
+      * debian/patches/fix-return-in-void-function.patch: Add minimal patch to
+        remove erroneous return statement in g10/photid.c which results in
+        FTBFS due to -Wreturn-mismatch (LP: #2090843)
+  
+     -- Alex Murray <alex.murray@canonical.com>  Tue, 03 Dec 2024 10:40:26 +1030
+  
+    gnupg2 (2.4.4-2ubuntu19) plucky; urgency=medium
+  
+      * Rebuild against latest libassuan
+  
+     -- Jeremy Bícha <jbicha@ubuntu.com>  Thu, 21 Nov 2024 10:40:56 -0500
+  
+    gnupg2 (2.4.4-2ubuntu18) oracular; urgency=medium
+  
+      * debian/patches/fix-disable-exec-ftbfs.patch: Fix FTBFS. Minor fix when
+        building with --disable-exec. Also remove get_max_fds() from
+        exechelp-w32.c since this function definition is already part of
+        gpg-error.h
+  
+     -- Nishit Majithia <nishit.majithia@canonical.com>  Thu, 22 Aug 2024 12:28:14 +0530
+  
+  libatasmart4 (built from libatasmart) updated from 0.19-5build3 to 0.19-6:
+  
+    libatasmart (0.19-6) unstable; urgency=medium
+  
+      * Correctly pass host flags to the build compiler (Closes: #1093595)
+      * Bump Standards-Version to 4.7.2
+      * Replace pkg-config Build-Depends with pkgconf
+      * Switch to debhelper-compat 13
+      * Do not fail on dh_missing
+      * Rebuild to avoid overly huge ELF segment alignment (Closes: #1065484)
+  
+     -- Michael Biebl <biebl@debian.org>  Fri, 15 Aug 2025 14:34:46 +0200
+  
+  libblockdev-crypto3, libblockdev-fs3, libblockdev-loop3, libblockdev-mdraid3, libblockdev-nvme3, libblockdev-part3, libblockdev-swap3, libblockdev-utils3, libblockdev3 (built from libblockdev) updated from 3.1.1-1ubuntu0.1 to 3.4.0-1:
+  
+    libblockdev (3.4.0-1) unstable; urgency=medium
+  
+      * New upstream release
+      * Rebase patches
+      * Update symbols files
+      * Mark _get_linux_version() as static
+      * Update debian/copyright
+  
+     -- Michael Biebl <biebl@debian.org>  Tue, 14 Oct 2025 15:36:07 +0200
+  
+    libblockdev (3.3.1-3) unstable; urgency=medium
+  
+      * Switch debian-branch to debian/latest as per DEP-14
+      * Update debian/copyright
+  
+     -- Michael Biebl <biebl@debian.org>  Fri, 15 Aug 2025 14:47:16 +0200
+  
+    libblockdev (3.3.1-2) unstable; urgency=medium
+  
+      * Replace Build-Depends on libgirepository1.0-dev.
+        Add gobject-introspection for g-ir-scanner and gir1.2-gio-2.0-dev and
+        gir1.2-gobject-2.0-de as src/lib/Makefile.am has
+        `BlockDev_3_0_gir_INCLUDES = GObject-2.0 Gio-2.0`.
+  
+     -- Michael Biebl <biebl@debian.org>  Fri, 15 Aug 2025 11:10:13 +0200
+  
+    libblockdev (3.3.1-1) unstable; urgency=medium
+  
+      * New upstream release
+      * Rebase patches
+      * Bump Standards-Version to 4.7.2
+  
+     -- Michael Biebl <biebl@debian.org>  Thu, 14 Aug 2025 12:23:08 +0200
+  
+    libblockdev (3.3.0-2.1) unstable; urgency=high
+  
+      * Non-maintainer upload by the Security Team.
+      * dont allow suid and dev set on fs resize (CVE-2025-6019)
+  
+     -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 09 Jun 2025 15:06:46 +0200
+  
+    libblockdev (3.3.0-2) unstable; urgency=medium
+  
+      * autopkgtest: Add dependency on vdo.
+        The LVM VDO tests require vdoformat.
+  
+     -- Michael Biebl <biebl@debian.org>  Thu, 27 Feb 2025 22:12:11 +0100
+  
+    libblockdev (3.3.0-1) unstable; urgency=medium
+  
+      * New upstream release
+      * Rebase patches
+      * Update symbols file for libblockdev3, libblockdev-lvm3 and
+        libblockdev-lvm-dbus3
+  
+     -- Michael Biebl <biebl@debian.org>  Thu, 13 Feb 2025 15:34:42 +0100
+  
+    libblockdev (3.2.1-1) unstable; urgency=medium
+  
+      * New upstream release
+  
+     -- Michael Biebl <biebl@debian.org>  Thu, 07 Nov 2024 23:22:34 +0100
+  
+    libblockdev (3.2.0-2) unstable; urgency=medium
+  
+      * Re-add s390 specific symbols for libblockdev
+      * Skip smartmontools integration test
+  
+     -- Michael Biebl <biebl@debian.org>  Sun, 15 Sep 2024 20:25:15 +0200
+  
+    libblockdev (3.2.0-1) unstable; urgency=medium
+  
+      * New upstream release
+      * Update debian/watch and debian/gbp.conf
+      * Drop patches, all merged upstream
+      * Disable smartmontools based SMART plugin which is (still) marked as
+        experimental
+      * Add Build-Depends on libatasmart-dev.
+        Required to build the libatasmart based SMART plugin.
+      * Add Build-Depends on libyaml-dev.
+        Required by the lvm and lvm-dbus plugin.
+      * Add packages for new smart plugin
+      * Update symbols files for libblockdev3, libblockdev-crypto3 and
+        libblockdev-utils3
+  
+     -- Michael Biebl <biebl@debian.org>  Thu, 12 Sep 2024 18:06:52 +0200
+  
+    libblockdev (3.1.1-2) unstable; urgency=medium
+  
+      [ Alessandro Astone ]
+      * Add upstream patches to fix build with gcc14.
+        The real fix would be in e2fsprogs, but it's still not fixed upstream:
+        https://lore.kernel.org/all/20240527091542.4121237-2-hi@alyssa.is/T/#u
+        (Closes: #1071320)
+  
+      [ Michael Biebl ]
+      * Add symbols file for libblockdev-mpath
+      * Add ${gir:Depends} and ${gir:Provides} to libblockdev-dev.
+        Fixes lintian warning W: libblockdev-dev:
+        gir-package-name-does-not-match gir1.2-blockdev-3.0-dev
+        [usr/share/gir-1.0/BlockDev-3.0.gir]
+      * Bump Standards-Version to 4.7.0, no further changes required
+  
+     -- Michael Biebl <biebl@debian.org>  Fri, 16 Aug 2024 19:23:21 +0200
+  
+  libbytesize-common, libbytesize1 (built from libbytesize) updated from 2.10-1ubuntu2 to 2.12-1:
+  
+    libbytesize (2.12-1) unstable; urgency=medium
+  
+      * Team upload
+      * New upstream version 2.12
+      * Drop Rules-Requires-Root: no.
+        No longer necessary as "no" is now the default.
+      * Update debian/copyright.
+        Remove reference to the old FSF postal address and refer to
+        https://www.gnu.org/licenses/ instead.
+  
+     -- Michael Biebl <biebl@debian.org>  Thu, 04 Dec 2025 17:45:56 +0100
+  
+    libbytesize (2.11-3) unstable; urgency=medium
+  
+      * Team upload
+      * Rename debian-branch to debian/latest as per DEP-14
+      * Bump Standards-Version to 4.7.2
+  
+     -- Michael Biebl <biebl@debian.org>  Fri, 15 Aug 2025 20:18:24 +0200
+  
+    libbytesize (2.11-2) unstable; urgency=medium
+  
+      * Team upload
+  
+      [ Sebastien Bacher ]
+      * enable upstream tests during the build and as autopkgtests
+  
+     -- Michael Biebl <biebl@debian.org>  Tue, 25 Feb 2025 13:24:38 +0100
+  
+    libbytesize (2.11-1) unstable; urgency=medium
+  
+      * Team upload
+      * New upstream version 2.11
+  
+     -- Michael Biebl <biebl@debian.org>  Wed, 21 Aug 2024 19:55:03 +0200
+  
+    libbytesize (2.10-2) unstable; urgency=medium
+  
+      * Team upload
+      * Drop extraneous dependency on python3-six from python3-bytesize.
+        No longer needed since 2.10. (Closes: #1069013)
+      * Bump Standards-Version to 4.7.0
+  
+     -- Michael Biebl <biebl@debian.org>  Mon, 15 Apr 2024 12:42:24 +0200
+  
+  libgudev-1.0-0 (built from libgudev) updated from 1:238-5ubuntu1 to 1:238-7build1:
+  
+  libksba8 (built from libksba) updated from 1.6.6-1build1 to 1.6.7-2build1:
+  
+    libksba (1.6.7-2build1) resolute; urgency=medium
+  
+      * No-change mass rebuild for Ubuntu 26.04 (LP: #2132257)
+  
+     -- Sebastien Bacher <seb128@debian.org>  Sat, 06 Dec 2025 11:30:40 +0100
+  
+    libksba (1.6.7-2) unstable; urgency=low
+  
+      * Upload to unstable.
+  
+     -- Andreas Metzler <ametzler@debian.org>  Mon, 01 Jul 2024 18:33:40 +0200
+  
+    libksba (1.6.7-1) experimental; urgency=medium
+  
+      * New upstream version.
+        + Unfuzz 25_norevisionfromgit.diff.
+        + Update copyright info.
+  
+     -- Andreas Metzler <ametzler@debian.org>  Sat, 29 Jun 2024 10:54:51 +0200
+  
+  libnvme1t64 (built from libnvme) updated from 1.8-3ubuntu1 to 1.16.1-4:
+  
+    libnvme (1.16.1-4) sid; urgency=medium
+  
+      * Also marking library dev package multi-arch same.
+  
+     -- Daniel Baumann <daniel@debian.org>  Sun, 15 Feb 2026 09:00:22 +0100
+  
+    libnvme (1.16.1-3) sid; urgency=medium
+  
+      * Updating to standards version 4.7.3.
+      * Wrap and sorting debian files.
+      * Sorting fields in control.
+      * Marking library package multi-arch same.
+      * Updating year in copyright for 2026.
+  
+     -- Daniel Baumann <daniel@debian.org>  Sun, 08 Feb 2026 08:10:16 +0100
+  
+    libnvme (1.16.1-2) sid; urgency=medium
+  
+      * Fixing FTCBFS by multiarchify Python build-depends and exporting cross
+        sysconfig name, thanks to Helmut Grohne <helmut@subdivi.de> (Closes:
+        #1123695).
+  
+     -- Daniel Baumann <daniel@debian.org>  Sat, 20 Dec 2025 04:19:31 +0100
+  
+    libnvme (1.16.1-1) sid; urgency=medium
+  
+      * Merging upstream version 1.16.1.
+  
+     -- Daniel Baumann <daniel@debian.org>  Sun, 09 Nov 2025 20:13:29 +0100
+  
+    libnvme (1.16-1) sid; urgency=medium
+  
+      * Removing rules-requires-root, not needed anymore.
+      * Updating watch file to version 5.
+      * Merging upstream version 1.16.
+  
+     -- Daniel Baumann <daniel@debian.org>  Sat, 08 Nov 2025 09:38:04 +0100
+  
+    libnvme (1.15-2) sid; urgency=medium
+  
+      * Uploading without changes to sid.
+  
+     -- Daniel Baumann <daniel@debian.org>  Sun, 10 Aug 2025 21:08:36 +0200
+  
+    libnvme (1.15-1) experimental; urgency=medium
+  
+      * Adding upstream metadata.
+      * Merging upstream version 1.15.
+  
+     -- Daniel Baumann <daniel@debian.org>  Tue, 29 Jul 2025 05:06:29 +0200
+  
+    libnvme (1.14-1) experimental; urgency=medium
+  
+      * Merging upstream version 1.14.
+  
+     -- Daniel Baumann <daniel@debian.org>  Thu, 22 May 2025 12:57:44 +0200
+  
+    libnvme (1.13-2) sid; urgency=medium
+  
+      * Simplifying watch file.
+  
+     -- Daniel Baumann <daniel@debian.org>  Fri, 02 May 2025 07:55:27 +0200
+  
+  libmpfr6 (built from mpfr4) updated from 4.2.1-1build1.1 to 4.2.2-3:
+  
+    mpfr4 (4.2.2-3) unstable; urgency=medium
+  
+      * Bump standards version.
+  
+     -- Matthias Klose <doko@debian.org>  Fri, 27 Mar 2026 09:05:03 +0100
+  
+    mpfr4 (4.2.2-2) unstable; urgency=medium
+  
+      * No-change upload for IEEE long double on ppc64el.
+      * Bump debhelper version.
+  
+     -- Matthias Klose <doko@debian.org>  Thu, 04 Sep 2025 15:41:46 +0200
+  
+    mpfr4 (4.2.2-1) unstable; urgency=medium
+  
+      * New upstream release.
+      * Bump debhelper and standards versions.
+  
+     -- Matthias Klose <doko@debian.org>  Tue, 25 Mar 2025 15:06:59 +0100
+  
+  libnspr4 (built from nspr) updated from 2:4.35-1.1build1 to 2:4.38.2-1ubuntu1:
+  
+    nspr (2:4.38.2-1ubuntu1) resolute; urgency=medium
+  
+      * Merge with Debian unstable (LP: #2130118). Remaining changes:
+        - Drop explicit -Wl,--as-needed linker flag. It's the default.
+        - Drop explicit CFLAGS that are checked by configure.
+        - Also use non-hardening flags from dpkg-buildflags to pick up flags
+          like -fno-omit-frame-pointer.
+  
+     -- Benjamin Drung <bdrung@ubuntu.com>  Wed, 10 Dec 2025 15:20:00 +0100
+  
+    nspr (2:4.38.2-1) unstable; urgency=medium
+  
+      * New upstream release.
+  
+     -- Mike Hommey <glandium@debian.org>  Wed, 12 Nov 2025 10:10:59 +0900
+  
+    nspr (2:4.37-1) unstable; urgency=medium
+  
+      * New upstream release.
+  
+     -- Mike Hommey <glandium@debian.org>  Thu, 02 Oct 2025 10:45:55 +0900
+  
+    nspr (2:4.36-1ubuntu2) questing; urgency=medium
+  
+      * No-change rebuild for IEEE long double on ppc64el
+  
+     -- Graham Inggs <ginggs@ubuntu.com>  Mon, 22 Sep 2025 11:23:23 +0000
+  
+    nspr (2:4.36-1ubuntu1) plucky; urgency=medium
+  
+      * Merge from Debian Unstable. Remaining changes:
+        - Drop explicit -Wl,--as-needed linker flag. It's the default.
+        - Drop explicit CFLAGS that are checked by configure.
+        - Also use non-hardening flags from dpkg-buildflags to pick up flags
+          like -fno-omit-frame-pointer.
+      * Dropped change (included upstream):
+        - d/p/fix-ftbfs-incompatible-thread-start-type.patch: Fix FTBFS due
+          to incompatible native thread start types (LP: #2081110)
+  
+     -- Simon Quigley <tsimonq2@ubuntu.com>  Tue, 11 Feb 2025 16:23:06 -0600
+  
+    nspr (2:4.36-1) unstable; urgency=medium
+  
+      * New upstream release.
+        - Fixes FTBFS with gcc 14. Closes: #1075322.
+  
+     -- Mike Hommey <glandium@debian.org>  Tue, 19 Nov 2024 07:05:41 +0900
+  
+    nspr (2:4.35-1.1ubuntu2) plucky; urgency=medium
+  
+      * d/p/fix-ftbfs-incompatible-thread-start-type.patch: Fix FTBFS due
+        to incompatible native thread start types (LP: #2081110)
+  
+     -- Lena Voytek <lena.voytek@canonical.com>  Fri, 11 Oct 2024 08:27:41 -0700
+  
+    nspr (2:4.35-1.1ubuntu1) oracular; urgency=medium
+  
+      * Drop explicit -Wl,--as-needed linker flag. It's the default.
+      * Drop explicit CFLAGS that are checked by configure.
+      * Also use non-hardening flags from dpkg-buildflags to pick up flags
+        like -fno-omit-frame-pointer.
+  
+     -- Benjamin Drung <bdrung@ubuntu.com>  Mon, 22 Jul 2024 11:39:40 +0200
+  
+  libnss3 (built from nss) updated from 2:3.98-1build1 to 2:3.120-1ubuntu2:
+  
+    nss (2:3.120-1ubuntu2) resolute; urgency=medium
+  
+      * d/p/c23-const.patch: fix build with glibc 2.43 (LP: #2142897)
+  
+     -- Simon Poirier <simon.poirier@canonical.com>  Wed, 11 Mar 2026 11:31:16 -0400
+  
+    nss (2:3.120-1ubuntu1) resolute; urgency=medium
+  
+      * SECURITY UPDATE: integer overflow in platform-independent ghash
+        - debian/patches/CVE-2026-2781.patch: properly cast len in
+          nss/lib/freebl/gcm.c.
+        - CVE-2026-2781
+  
+     -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Thu, 26 Feb 2026 12:49:32 -0500
+  
+    nss (2:3.120-1) unstable; urgency=medium
+  
+      * New upstream release.
+  
+     -- Mike Hommey <glandium@debian.org>  Wed, 14 Jan 2026 10:17:03 +0900
+  
+    nss (2:3.119-1) unstable; urgency=medium
+  
+      * New upstream release.
+  
+     -- Mike Hommey <glandium@debian.org>  Wed, 10 Dec 2025 09:23:00 +0900
+  
+    nss (2:3.117-1) unstable; urgency=medium
+  
+      * New upstream release.
+      * debian/libnss3.symbols: Add NSS_3.117 and NSSUTIL_3.117 symbol
+        versions.
+  
+     -- Mike Hommey <glandium@debian.org>  Wed, 15 Oct 2025 16:34:17 +0900
+  
+    nss (2:3.116-1) unstable; urgency=medium
+  
+      * New upstream release.
+      * debian/libnss3.symbols: Add NSS_3.115 and NSS_3.116 symbol versions.
+  
+     -- Mike Hommey <glandium@debian.org>  Wed, 17 Sep 2025 07:08:30 +0900
+  
+    nss (2:3.114-1) unstable; urgency=medium
+  
+      * New upstream release.
+      * debian/libnss3.symbols: Add NSS_3.113 symbol version.
+  
+     -- Mike Hommey <glandium@debian.org>  Wed, 23 Jul 2025 08:47:05 +0900
+  
+    nss (2:3.112-1) unstable; urgency=medium
+  
+      * New upstream release.
+  
+     -- Mike Hommey <glandium@debian.org>  Wed, 11 Jun 2025 08:57:36 +0900
+  
+    nss (2:3.111-1) unstable; urgency=medium
+  
+      * New upstream release.
+  
+     -- Mike Hommey <glandium@debian.org>  Mon, 26 May 2025 06:47:31 +0900
+  
+    nss (2:3.110-1) unstable; urgency=medium
+  
+      * New upstream release.
+      * debian/libnss3.symbols: Add NSS_3.110 symbol version.
+  
+     -- Mike Hommey <glandium@debian.org>  Wed, 02 Apr 2025 08:39:10 +0900
+  
+    nss (2:3.109-1) unstable; urgency=medium
+  
+      * New upstream release.
+  
+     -- Mike Hommey <glandium@debian.org>  Wed, 05 Mar 2025 06:13:17 +0900
+  
+    nss (2:3.108-1) unstable; urgency=medium
+  
+      * New upstream release.
+      * debian/libnss3.symbols: Add NSS_3.107 (not a typo) and NSSUTIL_3.108
+        symbol versions.
+  
+     -- Mike Hommey <glandium@debian.org>  Sun, 16 Feb 2025 05:02:59 +0900
+  
+    nss (2:3.107-1) unstable; urgency=medium
+  
+      * New upstream release.
+  
+     -- Mike Hommey <glandium@debian.org>  Wed, 08 Jan 2025 07:35:40 +0900
+  
+    nss (2:3.106-1) unstable; urgency=medium
+  
+      * New upstream release.
+  
+     -- Mike Hommey <glandium@debian.org>  Tue, 19 Nov 2024 07:29:02 +0900
+  
+    nss (2:3.105-2) unstable; urgency=medium
+  
+      * debian/rules: Set OS_TEST properly on ppc64el.
+  
+     -- Mike Hommey <glandium@debian.org>  Wed, 02 Oct 2024 09:34:34 +0900
+  
+    nss (2:3.105-1) unstable; urgency=medium
+  
+      * New upstream release.
+      * debian/rules: Override OS_TEST and KERNEL even when not cross-compiling.
+        Closes: #1083086
+  
+     -- Mike Hommey <glandium@debian.org>  Wed, 02 Oct 2024 07:06:03 +0900
+  
+    nss (2:3.103-1) unstable; urgency=medium
+  
+      * New upstream release.
+  
+     -- Mike Hommey <glandium@debian.org>  Wed, 07 Aug 2024 07:53:53 +0900
+  
+    nss (2:3.102-1) unstable; urgency=medium
+  
+      * New upstream release.
+  
+     -- Mike Hommey <glandium@debian.org>  Wed, 10 Jul 2024 08:54:51 +0900
+  
+    nss (2:3.101-1) unstable; urgency=medium
+  
+      * New upstream release.
+      * debian/libnss3.symbols: Add NSS_3.101 and NSSUTIL_3.101 symbol versions.
+  
+     -- Mike Hommey <glandium@debian.org>  Wed, 12 Jun 2024 06:13:56 +0900
+  
+    nss (2:3.100-1) unstable; urgency=medium
+  
+      * New upstream release.
+  
+     -- Mike Hommey <glandium@debian.org>  Wed, 15 May 2024 09:27:25 +0900
+  
+    nss (2:3.99-1) unstable; urgency=medium
+  
+      * New upstream release.
+      * debian/libnss3.symbols: Add NSS_3.99 symbol version for libsmime3.
+  
+     -- Mike Hommey <glandium@debian.org>  Wed, 20 Mar 2024 06:21:35 +0900
+  
+  libldap2 (built from openldap) updated from 2.6.7+dfsg-1~exp1ubuntu8.2 to 2.6.10+dfsg-1ubuntu5:
+  
+    openldap (2.6.10+dfsg-1ubuntu5) resolute; urgency=medium
+  
+      * d/t/ppm-contrib: test ppm password quality module (LP: #2121816)
+  
+     -- Jonas Jelten <jonas.jelten@canonical.com>  Mon, 24 Nov 2025 12:17:55 +0100
+  
+    openldap (2.6.10+dfsg-1ubuntu4) resolute; urgency=medium
+  
+      * pbkdf2 iteration configuration improvement (LP: #2125685)
+        - d/p/lp2125685-pbkdf2-fix-iteration-arg: prevent more module arguments
+        - d/t/pbkdf2-contrib: test for bogus arguments
+  
+     -- Jonas Jelten <jonas.jelten@canonical.com>  Thu, 23 Oct 2025 13:21:24 +0200
+  
+    openldap (2.6.10+dfsg-1ubuntu3) resolute; urgency=medium
+  
+      * Fix slapd apparmor profile (LP: #2119884)
+        - d/rules: fix dh_apparmor being skipped in -indep for -arch slapd package
+        - d/apparmor-profile: add systemd-notify support
+        - d/t/slapd: test if running in apparmor enforce mode
+      * d/rules: remove leftover bogus override_dh_auto_build target
+      * pbkdf2 iteration configuration support (LP: #2125685)
+        - d/p/lp2125685-pbkdf2-configurable-rounds: make iterations configurable
+        - d/p/lp2125685-pbkdf2-fix-iteration-arg: fix iteration argument index
+        - d/t/pbkdf2-contrib: test if pbkdf2 hashing rounds are adjustable
+  
+     -- Jonas Jelten <jonas.jelten@canonical.com>  Thu, 25 Sep 2025 15:45:49 +0200
+  
+    openldap (2.6.10+dfsg-1ubuntu2) questing; urgency=medium
+  
+      * Rebuild to include updated RISC-V base ISA RVA23
+  
+     -- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>  Sat, 06 Sep 2025 14:18:19 +0000
+  
+    openldap (2.6.10+dfsg-1ubuntu1) questing; urgency=medium
+  
+      * Merge with Debian unstable. Remaining changes:
+        - Enable AppArmor support:
+          + d/apparmor-profile: add AppArmor profile
+          + d/rules: use dh_apparmor
+          + d/control: Build-Depends on dh-apparmor
+          + d/slapd.README.Debian: add note about AppArmor
+        - Enable ufw support:
+          + d/control: suggest ufw.
+          + d/rules: install ufw profile.
+          + d/slapd.ufw.profile: add ufw profile.
+        - d/{rules,slapd.py}: Add apport hook.
+        - d/t/smbk5pwd: Allow the openldap user to read the Heimdal master
+          key in the smbk5pwd DEP8 test (LP #2004560)
+          [ Partially incorporated by Debian. ]
+        - d/control: make libldap2 depend on libldap-common.
+          (LP #2063161)
+  
+     -- Bryce Harrington <bryce@canonical.com>  Tue, 12 Aug 2025 10:57:08 -0700
+  
+    openldap (2.6.10+dfsg-1) unstable; urgency=medium
+  
+      * New upstream release.
+  
+     -- Ryan Tandy <ryan@nardis.ca>  Thu, 29 May 2025 16:41:48 -0700
+  
+    openldap (2.6.9+dfsg-2ubuntu1) plucky; urgency=medium
+  
+      * Merge with Debian unstable. Remaining changes:
+        - Enable AppArmor support:
+          + d/apparmor-profile: add AppArmor profile
+          + d/rules: use dh_apparmor
+          + d/control: Build-Depends on dh-apparmor
+          + d/slapd.README.Debian: add note about AppArmor
+        - Enable ufw support:
+          + d/control: suggest ufw.
+          + d/rules: install ufw profile.
+          + d/slapd.ufw.profile: add ufw profile.
+        - d/{rules,slapd.py}: Add apport hook.
+        - d/t/smbk5pwd: Allow the openldap user to read the Heimdal master
+          key in the smbk5pwd DEP8 test (LP #2004560)
+          [ Partially incorporated by Debian. ]
+        - d/control: make libldap2 depend on libldap-common. (LP #2063161)
+      * Drop changes:
+        - debian/rules: fix buildability under pkg.openldap.noslapd profile.
+          [ Not needed anymore. ]
+  
+     -- Bryce Harrington <bryce@canonical.com>  Fri, 14 Mar 2025 22:58:33 -0700
+  
+    openldap (2.6.9+dfsg-2) unstable; urgency=medium
+  
+      [ Adriano Rafael Gomes ]
+      * Update Brazilian Portuguese debconf templates translation
+        (Closes: #1093449)
+  
+      [ Ryan Tandy ]
+      * d/salsa-ci.yml: Switch to including just recipes/debian.yml.
+      * Fix FTCBFS: use AC_CHECK_TOOLS to detect host-prefixed tools. Thanks to
+        Helmut Grohne for the patch. (Closes: #1094386)
+      * d/rules: Add answers for native-only configure checks when cross-building.
+        Thanks to Helmut Grohne for his input.
+      * d/salsa-ci.yml: Enable cross-build test job.
+      * d/control: Annotate slapd's test dependencies with <!pkg.openldap.noslapd>
+        in addition to <!nocheck>.
+      * Delete obsolete manual testing scripts:
+        d/tests/{check_upgradepath,create_account,hammer_slapd}.
+      * d/rules: Stop including /usr/share/dpkg/buildtools.mk; no longer needed.
+      * d/control: Update Standards-Version to 4.7.2. No changes needed.
+  
+     -- Ryan Tandy <ryan@nardis.ca>  Tue, 11 Mar 2025 16:27:52 -0700
+  
+    openldap (2.6.9+dfsg-1) unstable; urgency=medium
+  
+      * Upload to unstable.
+      * d/slapd.preinst: Back up config as LDIF before transitioning to OpenSSL.
+      * d/NEWS, d/slapd.README.Debian:
+        - Announce the switch to OpenSSL.
+        - Document behaviour and config settings affected by the change.
+      * d/control: Declare Standards-Version: 4.7.0.
+      * d/slapd.service: Delete After=syslog.target. Fixes a Lintian warning
+        (systemd-service-file-refers-to-obsolete-target).
+      * Disable flaky tests test063-delta-multiprovider and
+        test069-delta-multiprovider-starttls. Mitigates #1010608.
+      * d/rules: Delete override_dh_auto_build target, so that -indep/-arch are
+        actually used. See #1014334.
+      * d/slapd.init:
+        - Fix status_of_proc pidfile argument.
+        - Fix olcPidFile regexp.
+      * d/control: Remove inactive team members from Uploaders. Thanks to Torsten
+        and Steve for their many past contributions.
+      * d/gbp.conf: Return to master branch.
+  
+     -- Ryan Tandy <ryan@nardis.ca>  Tue, 14 Jan 2025 18:30:51 -0800
+  
+    openldap (2.6.9+dfsg-1~exp2ubuntu1) plucky; urgency=medium
+  
+      * Merge with Debian unstable (LP: #2085260). Remaining changes:
+        - Enable AppArmor support:
+          + d/apparmor-profile: add AppArmor profile
+          + d/rules: use dh_apparmor
+          + d/control: Build-Depends on dh-apparmor
+          + d/slapd.README.Debian: add note about AppArmor
+        - Enable ufw support:
+          + d/control: suggest ufw.
+          + d/rules: install ufw profile.
+          + d/slapd.ufw.profile: add ufw profile.
+        - d/{rules,slapd.py}: Add apport hook.
+        - d/t/smbk5pwd: Allow the openldap user to read the Heimdal master key in the
+          smbk5pwd DEP8 test (LP #2004560)
+          [ Partially incorporated by Debian. ]
+        - d/control: make libldap2 depend on libldap-common. (LP #2063161)
+      * Drop changes:
+        - debian/rules: fix buildability under pkg.openldap.noslapd profile.
+          [ Not needed anymore. ]
+  
+     -- Sergio Durigan Junior <sergio.durigan@canonical.com>  Fri, 10 Jan 2025 16:55:16 -0500
+  
+    openldap (2.6.9+dfsg-1~exp2) experimental; urgency=medium
+  
+      [ Ryan Tandy ]
+      * Change TLS library from GnuTLS to OpenSSL.
+        - d/control: Replace Build-Depends: libgnutls28-dev, nettle-dev with
+          libssl-dev.
+        - d/configure.options: Configure --with-tls=openssl.
+        - d/p/contrib-makefiles: Drop changes to pbkdf2 and smbk5pwd to use
+          nettle.
+        - d/p/add-tlscacert-option-to-ldap-conf: Drop patch since the OpenSSL
+          backend activates the default CAs automatically.
+        - d/p/ldap-conf-tls-cacertdir: Drop patch since GnuTLS caveats are no
+          longer applicable.
+        - d/slapd.README.Debian: Drop GnuTLS caveat.
+  
+      [ Michael Tokarev ]
+      * d/control: remove very old (before buster) versioned depends/conflicts
+      * d/libldap2.README.Debian: remove: umounting /usr is not very interesting
+        in 2025 (see also #182536)
+      * remove ldiftopasswd script (it is a rather dangerous example to carry on)
+      * d/slapd.scripts-common,d/debian/slapd.postinst: do not create
+        /var/run/slapd (created in the startup script)
+      * d/slapd.init: stop providing /var/run/slapd/ldapi symlink for compatibility
+        with openldap 2.1
+      * d/slapd.init: simplify it significantly
+      * d/configure-options: enable systemd support (Closes: #1039299 #877512)
+      * d/slapd.default, d/slapd.init: do not use "export" keyword in the default
+        file (so it is processed by systemd), but export KRB5_KTNAME in init if set
+      * d/rules: fix $? usage in clean target
+      * d/rules: stop overriding dh_missing --fail-missing: it is the default
+        in dh-compat 13+
+      * d/rules: only do actual work in arch-dependent build
+      * d/control: add myself to Uploaders
+      * d/rules: add -Wno-unused-const-variable to CFLAGS
+      * d/rules: add LC_ALL=C for the build rule
+      * d/rules: add slapdS.c to blhc ignore-line
+      * d/libldap-dev.links: stop generating it, dh is capable to expand variables
+      * d/rules: fix override_dh_makeshlibs & override_dh_installdeb conditionals
+      * d/slapd.preinst: remove stopping of slapd
+        (#989155 in debhelper has been fixed)
+      * d/rules: build flags & build tools
+      * d/rules: simplify noslapd build-profile expressions by using noslapd var
+      * d/rules: export DEB_MAINTAINER only once
+  
+     -- Michael Tokarev <mjt@tls.msk.ru>  Wed, 08 Jan 2025 21:02:34 +0300
+  
+    openldap (2.6.9+dfsg-1~exp1) experimental; urgency=medium
+  
+      [ Carles Pina i Estany ]
+      * Update po-debconf Catalan translation
+  
+      [ Ryan Tandy ]
+      * New upstream release.
+        - Update patch 64-bit-time-t-compat.patch.
+        - Drop ITS#10253 patch, applied upstream.
+      * Apply patch from Helmut Grohne to fix cross-building ppm.
+        (Closes: #1079533)
+  
+     -- Ryan Tandy <ryan@nardis.ca>  Mon, 23 Dec 2024 12:07:55 -0800
+  
+    openldap (2.6.8+dfsg-1~exp4ubuntu3) plucky; urgency=medium
+  
+      * No-change rebuild for perl soname.
+  
+     -- Matthias Klose <doko@ubuntu.com>  Sun, 20 Oct 2024 21:35:40 +0200
+  
+    openldap (2.6.8+dfsg-1~exp4ubuntu2) plucky; urgency=medium
+  
+      * No-change rebuild for libperl soname.
+  
+     -- Matthias Klose <doko@ubuntu.com>  Sun, 20 Oct 2024 13:58:29 +0200
+  
+    openldap (2.6.8+dfsg-1~exp4ubuntu1) oracular; urgency=medium
+  
+      * Merge with Debian unstable (LP: #2078261). Remaining changes:
+        - Enable AppArmor support:
+          + d/apparmor-profile: add AppArmor profile
+          + d/rules: use dh_apparmor
+          + d/control: Build-Depends on dh-apparmor
+          + d/slapd.README.Debian: add note about AppArmor
+        - Enable ufw support:
+          + d/control: suggest ufw.
+          + d/rules: install ufw profile.
+          + d/slapd.ufw.profile: add ufw profile.
+        - d/{rules,slapd.py}: Add apport hook.
+        - d/t/smbk5pwd: Allow the openldap user to read the Heimdal master key in the
+          smbk5pwd DEP8 test (LP #2004560)
+          [ Partially incorporated by Debian. ]
+        - debian/rules: fix buildability under pkg.openldap.noslapd profile.
+        - debian/rules: drop override of dh_missing, --fail-missing is the default
+          with debhelper compat 13.
+        - d/control: make libldap2 depend on libldap-common. (LP #2063161)
+  
+     -- Sergio Durigan Junior <sergio.durigan@canonical.com>  Wed, 28 Aug 2024 13:49:17 -0400
+  
+    openldap (2.6.8+dfsg-1~exp4) experimental; urgency=medium
+  
+      * Add a superficial autopkgtest to ensure back_perl can be loaded.
+      * Fix FTBFS on 32-bit architectures. (ITS#10253) (Closes: #1078822)
+  
+     -- Ryan Tandy <ryan@nardis.ca>  Fri, 23 Aug 2024 12:15:12 -0700
+  
+    openldap (2.6.8+dfsg-1~exp3ubuntu1) oracular; urgency=medium
+  
+      * Merge with Debian unstable (LP: #2064434). Remaining changes:
+        - Enable AppArmor support:
+          + d/apparmor-profile: add AppArmor profile
+          + d/rules: use dh_apparmor
+          + d/control: Build-Depends on dh-apparmor
+          + d/slapd.README.Debian: add note about AppArmor
+        - Enable ufw support:
+          + d/control: suggest ufw.
+          + d/rules: install ufw profile.
+          + d/slapd.ufw.profile: add ufw profile.
+        - d/{rules,slapd.py}: Add apport hook.
+        - d/t/smbk5pwd: Allow the openldap user to read the Heimdal master key in the
+          smbk5pwd DEP8 test (LP #2004560)
+          [ Partially incorporated by Debian. ]
+        - debian/rules: fix buildability under pkg.openldap.noslapd profile.
+        - debian/rules: drop override of dh_missing, --fail-missing is the default
+          with debhelper compat 13.
+        - d/control: make libldap2 depend on libldap-common. (LP #2063161)
+      * Drop changes:
+        - debian/patches/64-bit-time-t-compat.patch: handle sizeof(time_t) >
+          sizeof(long) in format strings.
+          [ Incorporated by Debian. ]
+        - Fix implicit declaration of kadm5_s_init_with_password_ctx.
+          (Closes: #1065633)
+          [ Incorporated by upstream. ]
+        - d/rules: better regexp to match the Maintainer tag in d/control,
+          needed in the Ubuntu case because of XSBC-Original-Maintainer
+          (Closes #960448, LP #1875697)
+          [ Incorporated by Debian. ]
+  
+     -- Sergio Durigan Junior <sergio.durigan@canonical.com>  Tue, 25 Jun 2024 15:07:13 -0400
+  
+    openldap (2.6.8+dfsg-1~exp3) experimental; urgency=medium
+  
+      [ Helmut Grohne ]
+      * Move systemd drop-in to /usr (DEP17). (Closes: #1073059)
+  
+     -- Ryan Tandy <ryan@nardis.ca>  Wed, 12 Jun 2024 20:12:08 -0700
+  
+    openldap (2.6.8+dfsg-1~exp2) experimental; urgency=medium
+  
+      * Ship slapo-nestgroup files in the main slapd binary package.
+        - d/slapd-contrib.{install,manpages}: Move slapo-nestgroup files to...
+        - d/slapd.{install,manpages}: ...here.
+        Thanks to Ryan Tandy for letting me know about this mistake.
+  
+     -- Sergio Durigan Junior <sergiodj@debian.org>  Fri, 31 May 2024 13:30:18 -0400
+  
+    openldap (2.6.8+dfsg-1~exp1) experimental; urgency=medium
+  
+      [ Sergio Durigan Junior ]
+      * d/rules: Anchor DEB_MAINTAINER regexp.
+        This is needed in Ubuntu because of XSBC-Original-Maintainer.
+      * New upstream version 2.6.8+dfsg
+      * d/p/smbk5pwd-implicit-declaration: Remove; fixed upstream.
+      * d/control: B-D on pkgconf instead of pkg-config.
+      * d/p/slapd-contrib.{install,manpages}: Install new slapo-nestgroup overlay.
+  
+      [ Steve Langasek ]
+      * debian/patches/64-bit-time-t-compat:
+        handle sizeof(time_t) > sizeof(long) in format strings.
+  
+      [ Ryan Tandy ]
+      * Drop transitional package slapd-smbk5pwd. (Closes: #1032742)
+      * Drop dbgsym migration for slapd-dbg.
+        The dbgsym transition was done in buster.
+      * Build and install the ppm module in slapd-contrib. (Closes: #1039740)
+      * Fix implicit declaration of kadm5_s_init_with_password_ctx.
+        (Closes: #1065633)
+      * debian/patches/64-bit-time-t-compat.patch: Refresh patch.
+      * debian/copyright: Exclude doc/guide/admin/guide.html from
+        the upstream source.
+        The tool required to build it from source is not packaged in Debian.
+        Fixes a Lintian error (source-is-missing).
+      * Update Swedish debconf translation.
+        Thanks to Martin Bagge and Anders Jonsson (Closes: #1056955)
+      * debian/salsa-ci.yml: Enable Salsa CI pipeline.
+      * debian/copyright: Remove build/missing.
+        Fixes a Lintian warning (superfluous-file-pattern).
+  
+     -- Sergio Durigan Junior <sergiodj@debian.org>  Thu, 30 May 2024 23:18:02 -0400
+  
+    openldap (2.6.7+dfsg-1~exp1ubuntu9) oracular; urgency=medium
+  
+      * d/control: make libldap2 depend on libldap-common. (LP: #2063161)
+  
+     -- Athos Ribeiro <athos.ribeiro@canonical.com>  Wed, 12 Jun 2024 10:46:50 -0300
+  
+  pinentry-curses (built from pinentry) updated from 1.2.1-3ubuntu5 to 1.3.2-3ubuntu1:
+  
+    pinentry (1.3.2-3ubuntu1) resolute; urgency=medium
+  
+      * Merge with Debian unstable (LP: #2130061). Remaining changes:
+        - d/{control,rules}: don't build pinentry-qt on i386
+      * Dropped previously undocumented changes, as they aren't needed:
+        - d/control: Set minimum version of libassuan-dev
+        - d/control: Set Standards-Version to 4.6.2
+      * Dropped previously undocumented patch as it was upstreamed:
+        - d/p/0006-use-light-icons-on-dark-mode-qt.patch
+  
+     -- Ural Tunaboyu <ural.tunaboyu@canonical.com>  Fri, 31 Oct 2025 13:24:52 +0300
+  
+    pinentry (1.3.2-3) unstable; urgency=medium
+  
+      * Really upload to unstable.
+  
+     -- Andreas Metzler <ametzler@debian.org>  Mon, 11 Aug 2025 18:01:04 +0200
+  
+    pinentry (1.3.2-2) experimental; urgency=medium
+  
+      * Upload to unstable.
+  
+     -- Andreas Metzler <ametzler@debian.org>  Mon, 11 Aug 2025 14:27:06 +0200
+  
+    pinentry (1.3.2-1) experimental; urgency=low
+  
+      * New upstream version.
+      * Drop unneeded patch (outdated m4/libassuan.m4).
+      * Bump Standards-Version
+      * Update debian/copyright.
+  
+     -- Andreas Metzler <ametzler@debian.org>  Sat, 02 Aug 2025 13:29:42 +0200
+  
+    pinentry (1.3.1-2ubuntu3) plucky; urgency=medium
+  
+      * No-change rebuild for libassuan.
+  
+     -- Simon Quigley <tsimonq2@ubuntu.com>  Fri, 14 Mar 2025 22:53:26 -0500
+  
+    pinentry (1.3.1-2ubuntu2) plucky; urgency=medium
+  
+      * Re-add missing exclamation point.
+  
+     -- Simon Quigley <tsimonq2@ubuntu.com>  Tue, 11 Feb 2025 16:12:24 -0600
+  
+    pinentry (1.3.1-2ubuntu1) plucky; urgency=medium
+  
+      * Merge from Debian Unstable. Remaining changes:
+        - Don't build the Qt-based pinentry on i386.
+  
+     -- Simon Quigley <tsimonq2@ubuntu.com>  Tue, 11 Feb 2025 15:50:08 -0600
+  
+    pinentry (1.3.1-2) unstable; urgency=low
+  
+      * Add b-d on libkf6guiaddons-dev for qt capslock warning. Stop marking
+        libkf6windowsystem-dev [linux-any] since it is available on linux-archs,
+        too. (Thanks, Pino Toscano!)
+      * Cleanup debian/rules: Explicitly disable QT5 build, drop unused QT_SELECT.
+        QT_SELECT is irrelevant for Qt >= 6.
+      * Upload to unstable
+  
+     -- Andreas Metzler <ametzler@debian.org>  Tue, 31 Dec 2024 16:39:53 +0100
+  
+    pinentry (1.3.1-1) experimental; urgency=low
+  
+      * "New" upstream version.
+      * Unfuzz patches.
+      * pinentry-qt is now QT6 based, update b-d.
+      * Run wrap-and-sort -ast.
+      * Ship desktop file and icon in pinentry-qt.
+      * Update copyright info for 1.3.1.
+      * Add b-d on libkf6windowsystem-dev for wayland window parenting.
+        Marked [linux-any] since wayland is. MR !3
+  
+     -- Andreas Metzler <ametzler@debian.org>  Wed, 25 Dec 2024 07:53:15 +0100
+  
+    pinentry (1.3.1-0ubuntu2) plucky; urgency=medium
+  
+      * d/control: Don't build the Qt-based pinentry on i386 (LP: #2089005):
+        - Only build pinentry-qt on amd64, arm64, armhf, s390x, ppc64el, riscv64.
+        - Remove Build-Depends qt6-base-dev, libkf6guiaddons-dev
+          and libkf6windowsystem-dev on i386.
+  
+     -- Dominik Viererbe <dominik.viererbe@canonical.com>  Tue, 19 Nov 2024 11:56:40 +0200
+  
+    pinentry (1.3.1-0ubuntu1) plucky; urgency=medium
+  
+      * New upstream release.
+        - Switch pinentry-qt to Qt 6.
+      * Merge from Debian Unstable. Remaining changes:
+        - Don't build the Qt-based pinentry on i386.
+  
+     -- Simon Quigley <tsimonq2@ubuntu.com>  Sun, 20 Oct 2024 17:52:35 -0500
+  
+    pinentry (1.2.1-5) unstable; urgency=medium
+  
+      [ Debian Janitor ]
+      * Remove constraints unnecessary since buster (oldstable)
+        * Build-Depends: Drop versioned constraint on libassuan-dev,
+          libglib2.0-dev, libgpg-error-dev and libgtk2.0-dev.
+        Changes-By: deb-scrub-obsolete
+  
+      [ Andreas Metzler ]
+      * [lintian] B-D on pkgconf instead of pkg-config.
+      * Bump Standards-Version
+  
+     -- Andreas Metzler <ametzler@debian.org>  Tue, 24 Dec 2024 15:56:18 +0100
+  
+    pinentry (1.2.1-4) unstable; urgency=medium
+  
+      * Add myself to uploaders.
+      * Delete outdated m4/libassuan.m4 to allow building against libassuan 3.
+  
+     -- Andreas Metzler <ametzler@debian.org>  Mon, 26 Aug 2024 18:24:37 +0200
+  
+  libvolume-key1 (built from volume-key) updated from 0.3.12-7build2 to 0.3.12-10build2:
+  
+    volume-key (0.3.12-10build2) resolute; urgency=medium
+  
+      * No-change rebuild for gpgme1.0 2.0
+  
+     -- Ural Tunaboyu <ural.tunaboyu@canonical.com>  Thu, 19 Feb 2026 18:57:59 +0000
+  
+    volume-key (0.3.12-10build1) resolute; urgency=medium
+  
+      * No-change rebuild with Python 3.14 as default
+  
+     -- Graham Inggs <ginggs@ubuntu.com>  Thu, 22 Jan 2026 22:05:19 +0000
+  
+    volume-key (0.3.12-10) unstable; urgency=medium
+  
+      * Team upload
+      * Rename debian-branch to debian/latest as per DEP-14
+      * Bump Standards-Version to 4.7.2
+  
+     -- Michael Biebl <biebl@debian.org>  Fri, 15 Aug 2025 20:26:32 +0200
+  
+    volume-key (0.3.12-9) unstable; urgency=medium
+  
+      * Team upload.
+      * Drop explicit Depends on gnupg from libvolume-key1.
+        We use GnuPG via the GPGME library, so rely on libgpgme to pull in all
+        the dependencies it needs to function properly. (Closes: #1082703)
+  
+     -- Michael Biebl <biebl@debian.org>  Sat, 08 Feb 2025 23:42:28 +0100
+  
+    volume-key (0.3.12-8) unstable; urgency=medium
+  
+      * Team upload
+  
+      [ Helmut Grohne ]
+      * Fix FTCBFS (Closes: #1064360)
+        - Multiarchify python3-dev build dependency
+        - Use AC_PATH_TOOL to locate python3-config
+  
+      [ Michael Biebl ]
+      * Add explicit Build-Depends on python3-setuptools.
+        So far, this build dependency is pulled in automatically by dh-python,
+        but this is supposed to change in the future. (Closes: #1080901)
+      * Bump Standards-Version to 4.7.0, no further changes required
+  
+     -- Michael Biebl <biebl@debian.org>  Thu, 05 Sep 2024 17:29:24 +0200
+  
+  gnupg-utils: not primed anymore
+  
+  keyboxd: not primed anymore
+  
+  libgpgme11t64: not primed anymore
+  
 2025-09-10 udisks2 2.10.1-4
 
   [ Changes in primed packages ]
