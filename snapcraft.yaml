@@ -1,5 +1,5 @@
 name: udisks2
-version: 2.10.91-1
+version: 2.10.91-2-dev
 summary: Storage devices management service
 description: |
     Udisks2 provides a dbus service that can query and manager
