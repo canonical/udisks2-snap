@@ -1,14 +1,14 @@
-snapcraft-version: 8.11.2
-snapcraft-started-at: '2025-09-10T12:18:18.882270Z'
+snapcraft-version: 8.14.5.post106
+snapcraft-started-at: '2026-04-27T20:05:10.483000Z'
 snapcraft-os-release-id: ubuntu
-snapcraft-os-release-version-id: '24.04'
+snapcraft-os-release-version-id: '26.04'
 name: udisks2
-version: 2.10.1-4
+version: 2.10.91-1
 summary: Storage devices management service
 description: |
   Udisks2 provides a dbus service that can query and manager
   storages devices as well as a command-line tool.
-base: core24
+base: core26
 grade: stable
 confinement: strict
 apps:
@@ -33,44 +33,44 @@ parts:
   udisks2-copyright:
     plugin: nil
     stage-packages:
-    - adduser=3.137ubuntu1
-    - dirmngr=2.4.4-2ubuntu17.3
-    - dmidecode=3.5-3ubuntu0.1
-    - gnupg-utils=2.4.4-2ubuntu17.3
-    - gnupg=2.4.4-2ubuntu17.3
-    - gpg-agent=2.4.4-2ubuntu17.3
-    - gpg=2.4.4-2ubuntu17.3
-    - gpgconf=2.4.4-2ubuntu17.3
-    - gpgsm=2.4.4-2ubuntu17.3
-    - keyboxd=2.4.4-2ubuntu17.3
-    - libatasmart4=0.19-5build3
-    - libblockdev-crypto3=3.1.1-1ubuntu0.1
-    - libblockdev-fs3=3.1.1-1ubuntu0.1
-    - libblockdev-loop3=3.1.1-1ubuntu0.1
-    - libblockdev-mdraid3=3.1.1-1ubuntu0.1
-    - libblockdev-nvme3=3.1.1-1ubuntu0.1
-    - libblockdev-part3=3.1.1-1ubuntu0.1
-    - libblockdev-swap3=3.1.1-1ubuntu0.1
-    - libblockdev-utils3=3.1.1-1ubuntu0.1
-    - libblockdev3=3.1.1-1ubuntu0.1
-    - libbytesize-common=2.10-1ubuntu2
-    - libbytesize1=2.10-1ubuntu2
-    - libgpgme11t64=1.18.0-4.1ubuntu4
-    - libgudev-1.0-0=1:238-5ubuntu1
-    - libksba8=1.6.6-1build1
-    - libldap2=2.6.7+dfsg-1~exp1ubuntu8.2
-    - libmpfr6=4.2.1-1build1.1
-    - libnspr4=2:4.35-1.1build1
-    - libnss3=2:3.98-1build1
-    - libnvme1t64=1.8-3ubuntu1
-    - libparted2t64=3.6-4build1
-    - libsasl2-2=2.1.28+dfsg1-5ubuntu3.1
-    - libsasl2-modules-db=2.1.28+dfsg1-5ubuntu3.1
-    - libudisks2-0=2.10.1-6ubuntu1.3
-    - libvolume-key1=0.3.12-7build2
-    - parted=3.6-4build1
-    - pinentry-curses=1.2.1-3ubuntu5
-    - udisks2=2.10.1-6ubuntu1.3
+    - adduser=3.153ubuntu1
+    - dirmngr=2.4.8-4ubuntu3
+    - dmidecode=3.6-2build1
+    - gnupg=2.4.8-4ubuntu3
+    - gpg-agent=2.4.8-4ubuntu3
+    - gpg=2.4.8-4ubuntu3
+    - gpgconf=2.4.8-4ubuntu3
+    - gpgsm=2.4.8-4ubuntu3
+    - libatasmart4=0.19-6
+    - libblockdev-crypto3=3.4.0-1
+    - libblockdev-fs3=3.4.0-1
+    - libblockdev-loop3=3.4.0-1
+    - libblockdev-mdraid3=3.4.0-1
+    - libblockdev-nvme3=3.4.0-1
+    - libblockdev-part3=3.4.0-1
+    - libblockdev-smart3=3.4.0-1
+    - libblockdev-swap3=3.4.0-1
+    - libblockdev-utils3=3.4.0-1
+    - libblockdev3=3.4.0-1
+    - libbytesize-common=2.12-1
+    - libbytesize1=2.12-1
+    - libgpgme45=2.0.1-2build1
+    - libgudev-1.0-0=1:238-7build1
+    - libksba8=1.6.7-2build1
+    - libldap-common=2.6.10+dfsg-1ubuntu5
+    - libldap2=2.6.10+dfsg-1ubuntu5
+    - libmpfr6=4.2.2-3
+    - libnspr4=2:4.38.2-1ubuntu1
+    - libnss3=2:3.120-1ubuntu2
+    - libnvme1t64=1.16.1-4
+    - libparted2t64=3.6-6
+    - libsasl2-2=2.1.28+dfsg1-9ubuntu3
+    - libsasl2-modules-db=2.1.28+dfsg1-9ubuntu3
+    - libudisks2-0=2.10.91-1ubuntu2
+    - libvolume-key1=0.3.12-10build2
+    - parted=3.6-6
+    - pinentry-curses=1.3.2-3ubuntu1
+    - udisks2=2.10.91-1ubuntu2
     override-build: |
       cp -r "${CRAFT_PART_INSTALL}/usr/share/doc" doc
       rm -rf "${CRAFT_PART_INSTALL}"
@@ -97,56 +97,60 @@ parts:
     - libblockdev-crypto-dev
     - libpolkit-agent-1-dev
     - libpolkit-gobject-1-dev
+    - libblockdev-smart-dev
     - gettext
     - xsltproc
     - docbook-xsl
     - polkitd
     stage-packages:
-    - adduser=3.137ubuntu1
-    - dirmngr=2.4.4-2ubuntu17.3
-    - gnupg-utils=2.4.4-2ubuntu17.3
-    - gnupg=2.4.4-2ubuntu17.3
-    - gpg-agent=2.4.4-2ubuntu17.3
-    - gpg=2.4.4-2ubuntu17.3
-    - gpgconf=2.4.4-2ubuntu17.3
-    - gpgsm=2.4.4-2ubuntu17.3
-    - keyboxd=2.4.4-2ubuntu17.3
-    - libatasmart4=0.19-5build3
-    - libblockdev-crypto3=3.1.1-1ubuntu0.1
-    - libblockdev-fs3=3.1.1-1ubuntu0.1
-    - libblockdev-loop3=3.1.1-1ubuntu0.1
-    - libblockdev-mdraid3=3.1.1-1ubuntu0.1
-    - libblockdev-nvme3=3.1.1-1ubuntu0.1
-    - libblockdev-part3=3.1.1-1ubuntu0.1
-    - libblockdev-swap3=3.1.1-1ubuntu0.1
-    - libblockdev-utils3=3.1.1-1ubuntu0.1
-    - libblockdev3=3.1.1-1ubuntu0.1
-    - libbytesize-common=2.10-1ubuntu2
-    - libbytesize1=2.10-1ubuntu2
-    - libgpgme11t64=1.18.0-4.1ubuntu4
-    - libgudev-1.0-0=1:238-5ubuntu1
-    - libksba8=1.6.6-1build1
-    - libldap2=2.6.7+dfsg-1~exp1ubuntu8.2
-    - libmpfr6=4.2.1-1build1.1
-    - libnspr4=2:4.35-1.1build1
-    - libnss3=2:3.98-1build1
-    - libnvme1t64=1.8-3ubuntu1
-    - libsasl2-2=2.1.28+dfsg1-5ubuntu3.1
-    - libsasl2-modules-db=2.1.28+dfsg1-5ubuntu3.1
-    - libvolume-key1=0.3.12-7build2
-    - pinentry-curses=1.2.1-3ubuntu5
+    - adduser=3.153ubuntu1
+    - dirmngr=2.4.8-4ubuntu3
+    - gnupg=2.4.8-4ubuntu3
+    - gpg-agent=2.4.8-4ubuntu3
+    - gpg=2.4.8-4ubuntu3
+    - gpgconf=2.4.8-4ubuntu3
+    - gpgsm=2.4.8-4ubuntu3
+    - libatasmart4=0.19-6
+    - libblockdev-crypto3=3.4.0-1
+    - libblockdev-fs3=3.4.0-1
+    - libblockdev-loop3=3.4.0-1
+    - libblockdev-mdraid3=3.4.0-1
+    - libblockdev-nvme3=3.4.0-1
+    - libblockdev-part3=3.4.0-1
+    - libblockdev-smart3=3.4.0-1
+    - libblockdev-swap3=3.4.0-1
+    - libblockdev-utils3=3.4.0-1
+    - libblockdev3=3.4.0-1
+    - libbytesize-common=2.12-1
+    - libbytesize1=2.12-1
+    - libgpgme45=2.0.1-2build1
+    - libgudev-1.0-0=1:238-7build1
+    - libksba8=1.6.7-2build1
+    - libldap-common=2.6.10+dfsg-1ubuntu5
+    - libldap2=2.6.10+dfsg-1ubuntu5
+    - libmpfr6=4.2.2-3
+    - libnspr4=2:4.38.2-1ubuntu1
+    - libnss3=2:3.120-1ubuntu2
+    - libnvme1t64=1.16.1-4
+    - libsasl2-2=2.1.28+dfsg1-9ubuntu3
+    - libsasl2-modules-db=2.1.28+dfsg1-9ubuntu3
+    - libvolume-key1=0.3.12-10build2
+    - pinentry-curses=1.3.2-3ubuntu1
+    prime:
+    - -usr/lib/*/libnssckbi.so*
+    - -usr/lib/*/libnssdbm3*
     plugin: autotools
     autotools-configure-parameters:
     - --prefix=/usr
     - --enable-fhs-media
+    - --with-udevdir=/usr/lib/udev
     source-type: git
-    source-branch: applied/ubuntu/noble-updates
+    source-branch: applied/ubuntu/resolute
     source: https://git.launchpad.net/ubuntu/+source/udisks2
     override-pull: |
       craftctl default
       patch -p1 <"/build/udisks2/proc-mountinfo.patch"
     stage: []
-    prime: []
   policy:
     plugin: nil
     after:
@@ -162,40 +166,40 @@ parts:
 architectures:
 - amd64
 image-info:
-  build_url: https://launchpad.net/~snappy-hwe-team/snappy-hwe-snaps/+snap/udisks2-snap-24/+build/2900887
+  build_url: https://launchpad.net/~snappy-hwe-team/+snap/udisks2-snap-26/+build/3134571
 build-packages: []
 build-snaps: []
 primed-stage-packages:
-- adduser=3.137ubuntu1
-- dirmngr=2.4.4-2ubuntu17.3
-- gnupg-utils=2.4.4-2ubuntu17.3
-- gnupg=2.4.4-2ubuntu17.3
-- gpg-agent=2.4.4-2ubuntu17.3
-- gpg=2.4.4-2ubuntu17.3
-- gpgconf=2.4.4-2ubuntu17.3
-- gpgsm=2.4.4-2ubuntu17.3
-- keyboxd=2.4.4-2ubuntu17.3
-- libatasmart4=0.19-5build3
-- libblockdev-crypto3=3.1.1-1ubuntu0.1
-- libblockdev-fs3=3.1.1-1ubuntu0.1
-- libblockdev-loop3=3.1.1-1ubuntu0.1
-- libblockdev-mdraid3=3.1.1-1ubuntu0.1
-- libblockdev-nvme3=3.1.1-1ubuntu0.1
-- libblockdev-part3=3.1.1-1ubuntu0.1
-- libblockdev-swap3=3.1.1-1ubuntu0.1
-- libblockdev-utils3=3.1.1-1ubuntu0.1
-- libblockdev3=3.1.1-1ubuntu0.1
-- libbytesize-common=2.10-1ubuntu2
-- libbytesize1=2.10-1ubuntu2
-- libgpgme11t64=1.18.0-4.1ubuntu4
-- libgudev-1.0-0=1:238-5ubuntu1
-- libksba8=1.6.6-1build1
-- libldap2=2.6.7+dfsg-1~exp1ubuntu8.2
-- libmpfr6=4.2.1-1build1.1
-- libnspr4=2:4.35-1.1build1
-- libnss3=2:3.98-1build1
-- libnvme1t64=1.8-3ubuntu1
-- libsasl2-2=2.1.28+dfsg1-5ubuntu3.1
-- libsasl2-modules-db=2.1.28+dfsg1-5ubuntu3.1
-- libvolume-key1=0.3.12-7build2
-- pinentry-curses=1.2.1-3ubuntu5
+- adduser=3.153ubuntu1
+- dirmngr=2.4.8-4ubuntu3
+- gnupg=2.4.8-4ubuntu3
+- gpg-agent=2.4.8-4ubuntu3
+- gpg=2.4.8-4ubuntu3
+- gpgconf=2.4.8-4ubuntu3
+- gpgsm=2.4.8-4ubuntu3
+- libatasmart4=0.19-6
+- libblockdev-crypto3=3.4.0-1
+- libblockdev-fs3=3.4.0-1
+- libblockdev-loop3=3.4.0-1
+- libblockdev-mdraid3=3.4.0-1
+- libblockdev-nvme3=3.4.0-1
+- libblockdev-part3=3.4.0-1
+- libblockdev-smart3=3.4.0-1
+- libblockdev-swap3=3.4.0-1
+- libblockdev-utils3=3.4.0-1
+- libblockdev3=3.4.0-1
+- libbytesize-common=2.12-1
+- libbytesize1=2.12-1
+- libgpgme45=2.0.1-2build1
+- libgudev-1.0-0=1:238-7build1
+- libksba8=1.6.7-2build1
+- libldap-common=2.6.10+dfsg-1ubuntu5
+- libldap2=2.6.10+dfsg-1ubuntu5
+- libmpfr6=4.2.2-3
+- libnspr4=2:4.38.2-1ubuntu1
+- libnss3=2:3.120-1ubuntu2
+- libnvme1t64=1.16.1-4
+- libsasl2-2=2.1.28+dfsg1-9ubuntu3
+- libsasl2-modules-db=2.1.28+dfsg1-9ubuntu3
+- libvolume-key1=0.3.12-10build2
+- pinentry-curses=1.3.2-3ubuntu1

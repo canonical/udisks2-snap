@@ -1,5 +1,5 @@
 snapcraft-version: 8.14.5.post106
-snapcraft-started-at: '2026-04-27T20:09:06.318813Z'
+snapcraft-started-at: '2026-04-27T20:09:01.511797Z'
 snapcraft-os-release-id: ubuntu
 snapcraft-os-release-version-id: '26.04'
 name: udisks2
@@ -163,9 +163,9 @@ parts:
     prime: []
     build-packages: []
 architectures:
-- arm64
+- armhf
 image-info:
-  build_url: https://launchpad.net/~snappy-hwe-team/+snap/udisks2-snap-26/+build/3134570
+  build_url: https://launchpad.net/~snappy-hwe-team/+snap/udisks2-snap-26/+build/3134572
 build-packages: []
 build-snaps: []
 primed-stage-packages:
