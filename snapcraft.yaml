@@ -131,8 +131,8 @@ parts:
       - libblockdev-smart3
       - libgudev-1.0-0
     prime:
-      - -usr/lib/x86_64-linux-gnu/libnssckbi.so*
-      - -usr/lib/x86_64-linux-gnu/libnssdbm3*
+      - -usr/lib/*/libnssckbi.so*
+      - -usr/lib/*/libnssdbm3*
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=/usr
