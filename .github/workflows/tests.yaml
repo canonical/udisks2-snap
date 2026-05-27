@@ -3,7 +3,7 @@ name: Spread tests
 on:
   pull_request:
     branches:
-      - snap-24
+      - snap-26
 
 jobs:
   build:
@@ -15,3 +15,5 @@ jobs:
         env:
           LP_CREDENTIALS: ${{ secrets.LP_CREDENTIALS }}
         uses: canonical/system-snaps-cicd-tools/action-test@main
+        with:
+          spread_suites: "openstack:"
